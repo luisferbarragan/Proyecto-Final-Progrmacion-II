@@ -1,10 +1,16 @@
 namespace Proyecto_Final_Progrmacion_II
 {
-    public partial class Form1 : Form
+    public partial class FormPortadaUAA : Form
     {
-        public Form1()
+        public FormPortadaUAA()
         {
             InitializeComponent();
+            // Fakiue
+        }
+
+        private void btnContinuarPortadaUAA_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
