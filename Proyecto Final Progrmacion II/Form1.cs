@@ -5,12 +5,13 @@ namespace Proyecto_Final_Progrmacion_II
         public FormPortadaUAA()
         {
             InitializeComponent();
-            // Fakiue
         }
 
         private void btnContinuarPortadaUAA_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Hide();
+            FormIngresoUsuario f2 = new FormIngresoUsuario();
+            f2.ShowDialog();
         }
     }
 }

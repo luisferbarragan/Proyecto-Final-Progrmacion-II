@@ -50,7 +50,7 @@
             btnContinuarPortadaUAA.BackColor = Color.FromArgb(32, 44, 84);
             btnContinuarPortadaUAA.FlatStyle = FlatStyle.Flat;
             btnContinuarPortadaUAA.ForeColor = SystemColors.ButtonHighlight;
-            btnContinuarPortadaUAA.Location = new Point(168, 593);
+            btnContinuarPortadaUAA.Location = new Point(168, 603);
             btnContinuarPortadaUAA.Name = "btnContinuarPortadaUAA";
             btnContinuarPortadaUAA.Size = new Size(129, 34);
             btnContinuarPortadaUAA.TabIndex = 1;
