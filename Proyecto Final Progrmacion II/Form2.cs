@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,16 @@ namespace Proyecto_Final_Progrmacion_II
         public FormIngresoUsuario()
         {
             InitializeComponent();
+        }
+
+        private void buttonIngresar_Click(object sender, EventArgs e)
+        {
+            DataBase obj = new DataBase();
+            Usuarios aux = obj.consultarUsuarioContra("luis", "luis123");
+            if (aux != null )
+            {
+                MessageBox.Show("Usuario encontrado.");
+            }
         }
     }
 }
