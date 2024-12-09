@@ -63,6 +63,26 @@ namespace Proyecto_Final_Progrmacion_II.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Logotipo_marca_de_productos_sustentables_ilustrado_verde {
+            get {
+                object obj = ResourceManager.GetObject("Logotipo marca de productos sustentables ilustrado verde", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap overcat {
+            get {
+                object obj = ResourceManager.GetObject("overcat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PORTADA_UAA {
             get {
                 object obj = ResourceManager.GetObject("PORTADA UAA", resourceCulture);
