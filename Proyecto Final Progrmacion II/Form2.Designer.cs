@@ -39,7 +39,7 @@
             txtAccederUsuario.Name = "txtAccederUsuario";
             txtAccederUsuario.PlaceholderText = "usuario";
             txtAccederUsuario.Size = new Size(100, 23);
-            txtAccederUsuario.TabIndex = 0;
+            txtAccederUsuario.TabIndex = 1;
             // 
             // txtAccederContrasena
             // 
@@ -48,13 +48,14 @@
             txtAccederContrasena.PlaceholderText = "contraseña";
             txtAccederContrasena.Size = new Size(100, 23);
             txtAccederContrasena.TabIndex = 1;
+            txtAccederContrasena.UseSystemPasswordChar = true;
             // 
             // buttonIngresar
             // 
             buttonIngresar.Location = new Point(175, 540);
             buttonIngresar.Name = "buttonIngresar";
             buttonIngresar.Size = new Size(75, 23);
-            buttonIngresar.TabIndex = 2;
+            buttonIngresar.TabIndex = 0;
             buttonIngresar.Text = "Ingresar";
             buttonIngresar.UseVisualStyleBackColor = true;
             buttonIngresar.Click += buttonIngresar_Click;

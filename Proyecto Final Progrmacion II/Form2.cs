@@ -21,10 +21,23 @@ namespace Proyecto_Final_Progrmacion_II
         private void buttonIngresar_Click(object sender, EventArgs e)
         {
             DataBase obj = new DataBase();
-            Usuarios aux = obj.consultarUsuarioContra("luis", "luis123");
+            Usuarios aux = obj.consultarUsuarioContra(this.txtAccederUsuario.Text, this.txtAccederContrasena.Text);
             if (aux != null )
             {
-                MessageBox.Show("Usuario encontrado.");
+                if (aux.Nombre == "administrador")
+                {
+                    this.Hide();
+                    FormAdmin f1 = new FormAdmin();
+                    f1.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    this.Hide();
+                    FormMenu f2 = new FormMenu();
+                    f2.ShowDialog();
+                    this.Close();
+                }
             }
         }
     }
