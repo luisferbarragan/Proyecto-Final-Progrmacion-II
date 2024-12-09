@@ -62,12 +62,20 @@ namespace Proyecto_Final_Progrmacion_II
 
             listado.ForEach(p =>
             {
-                this.richTextBoxListado.AppendText("ID: " + p.Id + "\nNombre Imagen: " + p.NombreImg + "\nDescripcion: " + p.Descripcion + "\nPrecio: " + p.Precio + 
+                this.richTextBoxListado.AppendText("ID: " + p.Id + "\nNombre Imagen: " + p.NombreImg + "\nDescripcion: " + p.Descripcion + "\nPrecio: " + p.Precio +
                     "\nExistencias: " + p.Exist + "\n\n");
             });
 
             obj.Disconnect();
 
+        }
+
+        private void btnCerrarSesionAdmin_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormIngresoUsuario f1 = new FormIngresoUsuario();
+            f1.ShowDialog();
+            this.Close();
         }
     }
 }

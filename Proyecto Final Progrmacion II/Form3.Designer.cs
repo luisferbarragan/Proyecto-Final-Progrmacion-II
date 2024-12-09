@@ -28,33 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnCerrarSesion = new Button();
+            btnCerrarSesionMenu = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // btnCerrarSesion
+            // btnCerrarSesionMenu
             // 
-            btnCerrarSesion.Location = new Point(359, 646);
-            btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(93, 23);
-            btnCerrarSesion.TabIndex = 0;
-            btnCerrarSesion.Text = "Cerrar Sesión";
-            btnCerrarSesion.UseVisualStyleBackColor = true;
-            btnCerrarSesion.Click += btnCerrarSesion_Click;
+            btnCerrarSesionMenu.Location = new Point(359, 646);
+            btnCerrarSesionMenu.Name = "btnCerrarSesionMenu";
+            btnCerrarSesionMenu.Size = new Size(93, 23);
+            btnCerrarSesionMenu.TabIndex = 0;
+            btnCerrarSesionMenu.Text = "Cerrar Sesión";
+            btnCerrarSesionMenu.UseVisualStyleBackColor = true;
+            btnCerrarSesionMenu.Click += btnCerrarSesion_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(38, 41);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(100, 89);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
             // 
             // FormMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(464, 681);
-            Controls.Add(btnCerrarSesion);
+            Controls.Add(pictureBox1);
+            Controls.Add(btnCerrarSesionMenu);
             Name = "FormMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button btnCerrarSesion;
+        private Button btnCerrarSesionMenu;
+        private PictureBox pictureBox1;
     }
 }

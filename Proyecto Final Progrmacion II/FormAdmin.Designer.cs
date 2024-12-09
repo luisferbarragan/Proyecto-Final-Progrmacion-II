@@ -42,6 +42,7 @@
             tabPage3 = new TabPage();
             btnCargar = new Button();
             richTextBoxListado = new RichTextBox();
+            btnCerrarSesionAdmin = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -50,7 +51,7 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(59, 101);
+            btnEliminar.Location = new Point(57, 71);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(75, 23);
             btnEliminar.TabIndex = 0;
@@ -186,11 +187,22 @@
             richTextBoxListado.TabIndex = 0;
             richTextBoxListado.Text = "";
             // 
+            // btnCerrarSesionAdmin
+            // 
+            btnCerrarSesionAdmin.Location = new Point(361, 646);
+            btnCerrarSesionAdmin.Name = "btnCerrarSesionAdmin";
+            btnCerrarSesionAdmin.Size = new Size(91, 23);
+            btnCerrarSesionAdmin.TabIndex = 2;
+            btnCerrarSesionAdmin.Text = "Cerrar Sesion";
+            btnCerrarSesionAdmin.UseVisualStyleBackColor = true;
+            btnCerrarSesionAdmin.Click += btnCerrarSesionAdmin_Click;
+            // 
             // FormAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(464, 681);
+            Controls.Add(btnCerrarSesionAdmin);
             Controls.Add(tabControl1);
             Name = "FormAdmin";
             StartPosition = FormStartPosition.CenterScreen;
@@ -220,5 +232,6 @@
         private TabPage tabPage3;
         private RichTextBox richTextBoxListado;
         private Button btnCargar;
+        private Button btnCerrarSesionAdmin;
     }
 }
