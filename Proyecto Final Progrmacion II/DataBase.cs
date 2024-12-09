@@ -17,7 +17,7 @@ namespace Proyecto_Final_Progrmacion_II
         }
         public void Connect()
         {
-            string cadena = "Server=localhost;Port=33065;Database=overcatbd;User=root;Password=;SslMode=none;";
+            string cadena = "Server=localhost;Port=3306;Database=overcatbd;User=root;Password=;SslMode=none;";
             try
             {
                 connection = new MySqlConnection(cadena);
