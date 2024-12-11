@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             btnCerrarSesionMenu = new Button();
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            flowLayoutPanelImages = new FlowLayoutPanel();
             SuspendLayout();
             // 
             // btnCerrarSesionMenu
@@ -43,32 +42,31 @@
             btnCerrarSesionMenu.UseVisualStyleBackColor = true;
             btnCerrarSesionMenu.Click += btnCerrarSesion_Click;
             // 
-            // pictureBox1
+            // flowLayoutPanelImages
             // 
-            pictureBox1.Location = new Point(38, 41);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(100, 89);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
+            flowLayoutPanelImages.AutoScroll = true;
+            flowLayoutPanelImages.Location = new Point(11, 53);
+            flowLayoutPanelImages.Name = "flowLayoutPanelImages";
+            flowLayoutPanelImages.Size = new Size(477, 550);
+            flowLayoutPanelImages.TabIndex = 1;
             // 
             // FormMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(464, 681);
-            Controls.Add(pictureBox1);
+            Controls.Add(flowLayoutPanelImages);
             Controls.Add(btnCerrarSesionMenu);
             Name = "FormMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Load += FormMenu_Load;
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button btnCerrarSesionMenu;
-        private PictureBox pictureBox1;
+        private FlowLayoutPanel flowLayoutPanelImages;
     }
 }
