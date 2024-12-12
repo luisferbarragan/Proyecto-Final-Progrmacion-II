@@ -22,7 +22,7 @@ namespace Proyecto_Final_Progrmacion_II
         {
             DataBase obj = new DataBase();
             Usuarios aux = obj.consultarUsuarioContra(this.txtAccederUsuario.Text, this.txtAccederContrasena.Text);
-            if (aux != null )
+            if (aux != null)
             {
                 if (aux.Nombre == "administrador")
                 {
@@ -34,9 +34,9 @@ namespace Proyecto_Final_Progrmacion_II
                 else
                 {
                     this.Hide();
-                    FormMenu f2 = new FormMenu();
+                    FormMenu f2 = new FormMenu(aux);
                     f2.ShowDialog();
-                    this.Close();
+                    //this.Close();
                 }
             }
         }
