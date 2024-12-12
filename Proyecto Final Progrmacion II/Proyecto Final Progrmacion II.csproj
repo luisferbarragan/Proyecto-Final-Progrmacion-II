@@ -28,4 +28,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="xcopy &quot;$(ProjectDir)imagenes\*&quot; &quot;$(TargetDir)imagenes\&quot; /Y /E" />
+  </Target>
+
 </Project>
