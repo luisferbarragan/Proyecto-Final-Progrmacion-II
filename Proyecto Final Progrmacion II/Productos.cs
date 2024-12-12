@@ -14,6 +14,10 @@ namespace Proyecto_Final_Progrmacion_II
         private double precio;
         private int exist;
 
+        public Productos()
+        {
+
+        }
         public Productos(int id, string nombreImg, string descripcion, double precio, int exist)
         {
             this.id = id;

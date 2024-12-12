@@ -33,8 +33,12 @@
             panel1 = new Panel();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            flowLayoutPanelCarrito = new FlowLayoutPanel();
+            pictureBoxCarrito = new PictureBox();
+            textBoxTotal = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxCarrito).BeginInit();
             SuspendLayout();
             // 
             // btnCerrarSesionMenu
@@ -87,6 +91,35 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // flowLayoutPanelCarrito
+            // 
+            flowLayoutPanelCarrito.AutoScroll = true;
+            flowLayoutPanelCarrito.BackgroundImage = Properties.Resources.color2;
+            flowLayoutPanelCarrito.Location = new Point(11, 92);
+            flowLayoutPanelCarrito.Name = "flowLayoutPanelCarrito";
+            flowLayoutPanelCarrito.Size = new Size(477, 482);
+            flowLayoutPanelCarrito.TabIndex = 4;
+            flowLayoutPanelCarrito.Visible = false;
+            // 
+            // pictureBoxCarrito
+            // 
+            pictureBoxCarrito.Location = new Point(410, 630);
+            pictureBoxCarrito.Name = "pictureBoxCarrito";
+            pictureBoxCarrito.Size = new Size(40, 40);
+            pictureBoxCarrito.TabIndex = 5;
+            pictureBoxCarrito.TabStop = false;
+            pictureBoxCarrito.Click += pictureBoxCarrito_Click;
+            // 
+            // textBoxTotal
+            // 
+            textBoxTotal.Enabled = false;
+            textBoxTotal.Location = new Point(338, 587);
+            textBoxTotal.Name = "textBoxTotal";
+            textBoxTotal.ReadOnly = true;
+            textBoxTotal.Size = new Size(112, 23);
+            textBoxTotal.TabIndex = 6;
+            textBoxTotal.Visible = false;
+            // 
             // FormMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -94,8 +127,11 @@
             BackgroundImage = Properties.Resources.pag_principal1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(464, 681);
+            Controls.Add(textBoxTotal);
+            Controls.Add(pictureBoxCarrito);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
+            Controls.Add(flowLayoutPanelCarrito);
             Controls.Add(flowLayoutPanelImages);
             DoubleBuffered = true;
             Name = "FormMenu";
@@ -104,7 +140,9 @@
             Load += FormMenu_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxCarrito).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -114,5 +152,8 @@
         private Panel panel1;
         private Label label1;
         private PictureBox pictureBox1;
+        private FlowLayoutPanel flowLayoutPanelCarrito;
+        private PictureBox pictureBoxCarrito;
+        private TextBox textBoxTotal;
     }
 }
