@@ -37,6 +37,7 @@
             pictureBoxCarrito = new PictureBox();
             textBoxTotal = new TextBox();
             buttonComprar = new Button();
+            lblHoraFecha = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCarrito).BeginInit();
@@ -44,8 +45,11 @@
             // 
             // btnCerrarSesionMenu
             // 
-            btnCerrarSesionMenu.BackColor = Color.AntiqueWhite;
+            btnCerrarSesionMenu.BackColor = Color.MediumSlateBlue;
+            btnCerrarSesionMenu.BackgroundImageLayout = ImageLayout.None;
+            btnCerrarSesionMenu.FlatAppearance.BorderSize = 0;
             btnCerrarSesionMenu.FlatStyle = FlatStyle.Flat;
+            btnCerrarSesionMenu.ForeColor = Color.WhiteSmoke;
             btnCerrarSesionMenu.Location = new Point(13, 31);
             btnCerrarSesionMenu.Name = "btnCerrarSesionMenu";
             btnCerrarSesionMenu.Size = new Size(91, 23);
@@ -107,8 +111,9 @@
             // 
             // pictureBoxCarrito
             // 
+            pictureBoxCarrito.BackgroundImageLayout = ImageLayout.Center;
             pictureBoxCarrito.Image = Properties.Resources.carrito;
-            pictureBoxCarrito.Location = new Point(406, 623);
+            pictureBoxCarrito.Location = new Point(412, 628);
             pictureBoxCarrito.Name = "pictureBoxCarrito";
             pictureBoxCarrito.Size = new Size(40, 40);
             pictureBoxCarrito.TabIndex = 5;
@@ -142,6 +147,18 @@
             buttonComprar.Visible = false;
             buttonComprar.Click += buttonComprar_Click;
             // 
+            // lblHoraFecha
+            // 
+            lblHoraFecha.AutoSize = true;
+            lblHoraFecha.BackColor = Color.Chartreuse;
+            lblHoraFecha.BorderStyle = BorderStyle.FixedSingle;
+            lblHoraFecha.Location = new Point(16, 634);
+            lblHoraFecha.Name = "lblHoraFecha";
+            lblHoraFecha.Size = new Size(78, 17);
+            lblHoraFecha.TabIndex = 8;
+            lblHoraFecha.Text = "Fecha y Hora";
+            lblHoraFecha.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // FormMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -149,6 +166,7 @@
             BackgroundImage = Properties.Resources.pag_principal1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(464, 681);
+            Controls.Add(lblHoraFecha);
             Controls.Add(buttonComprar);
             Controls.Add(textBoxTotal);
             Controls.Add(pictureBoxCarrito);
@@ -179,5 +197,6 @@
         private PictureBox pictureBoxCarrito;
         private TextBox textBoxTotal;
         private Button buttonComprar;
+        private Label lblHoraFecha;
     }
 }

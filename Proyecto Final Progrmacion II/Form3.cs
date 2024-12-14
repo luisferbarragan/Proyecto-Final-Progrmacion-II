@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,6 +29,7 @@ namespace Proyecto_Final_Progrmacion_II
             DataBase obj = new DataBase();
             listado = obj.consulta();
             FormIngresoUsuario f1 = new FormIngresoUsuario();
+            lblHoraFecha.Text = DateTime.Now.ToString("dd/MM/yyyy\n HH:mm:ss");
             foreach (var p in listado)
             {
                 imagenes.Add(p.NombreImg); // Add image paths to the list
@@ -72,7 +75,7 @@ namespace Proyecto_Final_Progrmacion_II
                         Text = producto.Descripcion, // Use the text from the database
                         AutoSize = false, // Allow custom width/height
                         TextAlign = ContentAlignment.MiddleCenter, // Center align the text
-                        ForeColor = Color.White, // Set the text color for better visibility
+                        ForeColor = Color.Black, // Set the text color for better visibility
                         Font = new Font("SugarPieW00-Regular", 10, FontStyle.Italic), // Optional: Customize the font
                         BackColor = Color.Transparent, // Set the background to transparent
                         Width = 220, // Match the width of the PictureBox
@@ -345,6 +348,7 @@ namespace Proyecto_Final_Progrmacion_II
                 flowLayoutPanelImages.Visible = false;
                 textBoxTotal.Visible = true;
                 buttonComprar.Visible = true;
+                pictureBoxCarrito.BorderStyle = BorderStyle.Fixed3D;
             }
             else
             {
@@ -352,6 +356,7 @@ namespace Proyecto_Final_Progrmacion_II
                 flowLayoutPanelImages.Visible = true;
                 textBoxTotal.Visible = false;
                 buttonComprar.Visible = false;
+                pictureBoxCarrito.BorderStyle = BorderStyle.None;
             }
         }
         private void ActualizarTotal()
@@ -374,6 +379,7 @@ namespace Proyecto_Final_Progrmacion_II
 
                 // Sumar el monto total
                 double total = cart.Sum(item => item.producto.Precio * item.cantidad);
+                double totalConImpuesto = total + (total * 0.06);
                 int totalPlayeras = cart.Sum(item => item.cantidad);
 
                 // Instancia de la base de datos
@@ -407,7 +413,10 @@ namespace Proyecto_Final_Progrmacion_II
                         return;
                     }
                 }
-                    
+
+                FormNotaCompra resumenCompra = new FormNotaCompra(DateTime.Now, cart, totalConImpuesto);
+                resumenCompra.ShowDialog();
+
                 // Limpiar el carrito después de la compra
                 cart.Clear();
                 mostrarProductoFlowLayoutCarrito(cart);

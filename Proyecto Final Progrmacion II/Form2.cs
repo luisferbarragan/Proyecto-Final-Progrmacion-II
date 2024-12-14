@@ -36,7 +36,7 @@ namespace Proyecto_Final_Progrmacion_II
                     this.Hide();
                     FormMenu f2 = new FormMenu(aux);
                     f2.ShowDialog();
-                    //this.Close();
+                    this.Close();
                 }
             }
         }

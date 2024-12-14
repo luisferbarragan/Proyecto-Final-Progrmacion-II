@@ -124,5 +124,10 @@ namespace Proyecto_Final_Progrmacion_II
                 db.Disconnect();
             }
         }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
