@@ -12,10 +12,11 @@ namespace Proyecto_Final_Progrmacion_II
 {
     public partial class FormMenu : Form
     {
+        private Usuarios usuarioActual;
         public FormMenu(Usuarios user)
         {
             InitializeComponent();
-            Usuarios usuarioActual = user;
+            usuarioActual = user;
             label1.Text = usuarioActual.Nombre;
         }
 
@@ -81,12 +82,14 @@ namespace Proyecto_Final_Progrmacion_II
 
                     Button button = new Button
                     {
-                        Text = "Info", // Change the label to "Info"
+                        Text = "", // Change the label to "Info"
                         Size = new Size(25, 25), // Set the size of the button
                         Location = new Point(20, 5), // Position at the top-left corner of the panel
                         BackColor = Color.White, // Set the button color
                         ForeColor = Color.Black, // Set the text color
                         FlatStyle = FlatStyle.Flat, // Optional: Flat style for modern look
+                        BackgroundImage = Image.FromFile(Path.Combine(imagesPath, "info.png")),
+                        BackgroundImageLayout = ImageLayout.Stretch
                     };
                     button.FlatAppearance.BorderSize = 0; // Remove the border
 
@@ -106,7 +109,9 @@ namespace Proyecto_Final_Progrmacion_II
                         Location = new Point(170, 5),
                         BackColor = Color.Green,
                         ForeColor = Color.White,
-                        FlatStyle = FlatStyle.Flat
+                        FlatStyle = FlatStyle.Flat,
+                        BackgroundImage = Image.FromFile(Path.Combine(imagesPath, "carrito.png")),
+                        BackgroundImageLayout = ImageLayout.Stretch
                     };
                     addToCartButton.FlatAppearance.BorderSize = 0;
                     addToCartButton.Click += (s, e) => AddToCart(producto);
@@ -182,7 +187,7 @@ namespace Proyecto_Final_Progrmacion_II
                 AutoSize = false,
                 TextAlign = ContentAlignment.MiddleCenter,
                 ForeColor = Color.Black,
-                Font = new Font("Impact", 10, FontStyle.Italic),
+                Font = new Font("SugarPieW00-Regular", 10, FontStyle.Italic),
                 Width = 220,
                 Height = 30,
                 Dock = DockStyle.Top
@@ -212,7 +217,7 @@ namespace Proyecto_Final_Progrmacion_II
             flowLayoutPanelCarrito.Controls.Clear(); // Clear existing controls to avoid duplicates
             string imagesFolder = "imagenes"; // Replace with the folder name that contains the images
             string imagesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagesFolder);
-            
+
             foreach (var item in productosEnCarrito)
             {
                 try
@@ -224,7 +229,6 @@ namespace Proyecto_Final_Progrmacion_II
                         Width = 450, // Set width
                         Height = 75, // Set height
                         Margin = new Padding(0), // Add some spacing
-                        BorderStyle = BorderStyle.FixedSingle, // Optional: Add a border for better visual separation
                         BackgroundImage = Image.FromFile(Path.Combine(imagesPath, nombreImgCarrito)), // Set the background image
                         BackgroundImageLayout = ImageLayout.Stretch // Stretch the image to fit the 
                     };
@@ -235,11 +239,11 @@ namespace Proyecto_Final_Progrmacion_II
                         Text = item.producto.Descripcion, // Use the product name
                         AutoSize = false, // Allow custom width/height
                         TextAlign = ContentAlignment.MiddleCenter, // Center align the text
-                        ForeColor = Color.Black, // Set the text color
+                        ForeColor = Color.White, // Set the text color
                         BackColor = Color.Transparent,
-                        Font = new Font("Arial", 10, FontStyle.Bold), // Customize the font
+                        Font = new Font("Arial", 10, FontStyle.Italic), // Customize the font
                         Width = 200, // Match the width of the panel
-                        Height = 25, // Set a fixed height for the label
+                        Height = 20, // Set a fixed height for the label
                         Dock = DockStyle.Top // Position the label at the top
                     };
 
@@ -249,11 +253,11 @@ namespace Proyecto_Final_Progrmacion_II
                         Text = $"Precio: {(item.producto.Precio * item.cantidad):C}", // Use the product price
                         AutoSize = false, // Allow custom width/height
                         TextAlign = ContentAlignment.MiddleCenter, // Center align the text
-                        ForeColor = Color.Black, // Set the text color
+                        ForeColor = Color.White, // Set the text color
                         BackColor = Color.Transparent,
-                        Font = new Font("Arial", 9, FontStyle.Regular), // Customize the font
+                        Font = new Font("Arial", 10, FontStyle.Italic), // Customize the font
                         Width = 200, // Match the width of the panel
-                        Height = 25, // Set a fixed height for the label
+                        Height = 20, // Set a fixed height for the label
                         Dock = DockStyle.Top // Position the label below the name
                     };
 
@@ -262,10 +266,10 @@ namespace Proyecto_Final_Progrmacion_II
                     {
                         Text = $"Cantidad: {item.cantidad}", // Use the product stock
                         AutoSize = false, // Allow custom width/height
-                        TextAlign = ContentAlignment.MiddleCenter, // Center align the text
-                        ForeColor = Color.Black, // Set the text color
+                        TextAlign = ContentAlignment.BottomCenter, // Center align the text
+                        ForeColor = Color.White, // Set the text color
                         BackColor = Color.Transparent,
-                        Font = new Font("Arial", 9, FontStyle.Regular), // Customize the font
+                        Font = new Font("Arial", 10, FontStyle.Italic), // Customize the font
                         Width = 200, // Match the width of the panel
                         Height = 25, // Set a fixed height for the label
                         Dock = DockStyle.Top // Position the label below the price
@@ -330,6 +334,7 @@ namespace Proyecto_Final_Progrmacion_II
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             MostrarCuenta();
+            panel1.BringToFront();
         }
 
         private void pictureBoxCarrito_Click(object sender, EventArgs e)
@@ -339,12 +344,14 @@ namespace Proyecto_Final_Progrmacion_II
                 flowLayoutPanelCarrito.Visible = true;
                 flowLayoutPanelImages.Visible = false;
                 textBoxTotal.Visible = true;
+                buttonComprar.Visible = true;
             }
             else
             {
                 flowLayoutPanelCarrito.Visible = false;
                 flowLayoutPanelImages.Visible = true;
                 textBoxTotal.Visible = false;
+                buttonComprar.Visible = false;
             }
         }
         private void ActualizarTotal()
@@ -352,5 +359,89 @@ namespace Proyecto_Final_Progrmacion_II
             double total = cart.Sum(item => item.producto.Precio * item.cantidad);
             textBoxTotal.Text = total.ToString("C");
         }
+
+        private void buttonComprar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cart.Count == 0)
+                {
+                    MessageBox.Show("El carrito está vacío. Agregue productos antes de realizar una compra.", "Carrito vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                
+
+                // Sumar el monto total
+                double total = cart.Sum(item => item.producto.Precio * item.cantidad);
+                int totalPlayeras = cart.Sum(item => item.cantidad);
+
+                // Instancia de la base de datos
+                DataBase db = new DataBase();
+
+                // Actualizar la base de datos del usuario
+                bool usuarioActualizado = db.ActualizarMontoUsuario(usuarioActual.Id, total);
+
+                if (!usuarioActualizado)
+                {
+                    MessageBox.Show("Hubo un problema al actualizar el monto del usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                bool ventaRegistrada = db.RegistrarVenta(usuarioActual.Id, total, totalPlayeras);
+
+                if (!ventaRegistrada)
+                {
+                    MessageBox.Show("Hubo un problema al registrar la venta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Actualizar las existencias de productos en la base de datos
+                foreach (var item in cart)
+                {
+                    bool productoActualizado = db.ReducirExistenciasProducto(item.producto.Id, item.cantidad);
+
+                    if (!productoActualizado)
+                    {
+                        MessageBox.Show($"Hubo un problema al actualizar las existencias del producto: {item.producto.Descripcion}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                    
+                // Limpiar el carrito después de la compra
+                cart.Clear();
+                mostrarProductoFlowLayoutCarrito(cart);
+                ActualizarTotal();
+                RefrescarDatos();
+
+                MessageBox.Show("Compra realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hubo un error durante la compra: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RefrescarDatos()
+        {
+            try
+            {
+                // Recargar los productos desde la base de datos
+                DataBase db = new DataBase();
+                List<Productos> productosActualizados = db.consulta();
+
+                // Actualizar la vista de productos
+                flowLayoutPanelImages.Controls.Clear(); // Limpiar los datos actuales
+                LoadImagesAndTextToFlowLayoutPanel(productosActualizados);
+
+                // Opcional: Recargar el total del carrito si es necesario
+                ActualizarTotal();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al refrescar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

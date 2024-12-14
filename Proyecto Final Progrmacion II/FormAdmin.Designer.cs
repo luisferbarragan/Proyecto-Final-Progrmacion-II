@@ -42,16 +42,24 @@
             tabPage3 = new TabPage();
             btnCargar = new Button();
             richTextBoxListado = new RichTextBox();
+            tabPage4 = new TabPage();
+            btnCargarRichTxt2 = new Button();
+            richTextBoxOrdenadaPorExist = new RichTextBox();
+            tabPage5 = new TabPage();
+            buttonMostrarTotalVentas = new Button();
+            textBoxTotalVentas = new TextBox();
             btnCerrarSesionAdmin = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tabPage5.SuspendLayout();
             SuspendLayout();
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(57, 71);
+            btnEliminar.Location = new Point(180, 133);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(75, 23);
             btnEliminar.TabIndex = 0;
@@ -64,10 +72,12 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
-            tabControl1.Location = new Point(133, 12);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
+            tabControl1.Location = new Point(12, 135);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(200, 400);
+            tabControl1.Size = new Size(440, 395);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -77,14 +87,14 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(192, 372);
+            tabPage1.Size = new Size(432, 367);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // txtEliminar
             // 
-            txtEliminar.Location = new Point(45, 42);
+            txtEliminar.Location = new Point(168, 104);
             txtEliminar.Name = "txtEliminar";
             txtEliminar.PlaceholderText = "id";
             txtEliminar.Size = new Size(100, 23);
@@ -102,14 +112,14 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(192, 372);
+            tabPage2.Size = new Size(432, 367);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtAgregarId
             // 
-            txtAgregarId.Location = new Point(45, 42);
+            txtAgregarId.Location = new Point(173, 45);
             txtAgregarId.Name = "txtAgregarId";
             txtAgregarId.PlaceholderText = "ID";
             txtAgregarId.Size = new Size(100, 23);
@@ -117,7 +127,7 @@
             // 
             // txtAgregarNombreImg
             // 
-            txtAgregarNombreImg.Location = new Point(45, 83);
+            txtAgregarNombreImg.Location = new Point(173, 86);
             txtAgregarNombreImg.Name = "txtAgregarNombreImg";
             txtAgregarNombreImg.PlaceholderText = "Nombre Imagen";
             txtAgregarNombreImg.Size = new Size(100, 23);
@@ -125,7 +135,7 @@
             // 
             // txtAgregarDescripcion
             // 
-            txtAgregarDescripcion.Location = new Point(43, 123);
+            txtAgregarDescripcion.Location = new Point(171, 126);
             txtAgregarDescripcion.Multiline = true;
             txtAgregarDescripcion.Name = "txtAgregarDescripcion";
             txtAgregarDescripcion.PlaceholderText = "Descripcion";
@@ -134,7 +144,7 @@
             // 
             // txtAgregarPrecio
             // 
-            txtAgregarPrecio.Location = new Point(43, 233);
+            txtAgregarPrecio.Location = new Point(171, 236);
             txtAgregarPrecio.Name = "txtAgregarPrecio";
             txtAgregarPrecio.PlaceholderText = "Precio";
             txtAgregarPrecio.Size = new Size(100, 23);
@@ -142,7 +152,7 @@
             // 
             // txtAgregarExist
             // 
-            txtAgregarExist.Location = new Point(43, 271);
+            txtAgregarExist.Location = new Point(171, 274);
             txtAgregarExist.Name = "txtAgregarExist";
             txtAgregarExist.PlaceholderText = "Existencias";
             txtAgregarExist.Size = new Size(100, 23);
@@ -150,7 +160,7 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(57, 307);
+            btnAgregar.Location = new Point(185, 310);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(75, 23);
             btnAgregar.TabIndex = 0;
@@ -164,14 +174,14 @@
             tabPage3.Controls.Add(richTextBoxListado);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(192, 372);
+            tabPage3.Size = new Size(432, 367);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
             // 
             // btnCargar
             // 
-            btnCargar.Location = new Point(58, 337);
+            btnCargar.Location = new Point(189, 337);
             btnCargar.Name = "btnCargar";
             btnCargar.Size = new Size(75, 23);
             btnCargar.TabIndex = 1;
@@ -181,11 +191,71 @@
             // 
             // richTextBoxListado
             // 
-            richTextBoxListado.Location = new Point(10, 12);
+            richTextBoxListado.Location = new Point(141, 12);
             richTextBoxListado.Name = "richTextBoxListado";
             richTextBoxListado.Size = new Size(169, 316);
             richTextBoxListado.TabIndex = 0;
             richTextBoxListado.Text = "";
+            // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(btnCargarRichTxt2);
+            tabPage4.Controls.Add(richTextBoxOrdenadaPorExist);
+            tabPage4.Location = new Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(432, 367);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "tabPage4";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btnCargarRichTxt2
+            // 
+            btnCargarRichTxt2.Location = new Point(179, 336);
+            btnCargarRichTxt2.Name = "btnCargarRichTxt2";
+            btnCargarRichTxt2.Size = new Size(75, 23);
+            btnCargarRichTxt2.TabIndex = 2;
+            btnCargarRichTxt2.Text = "Cargar";
+            btnCargarRichTxt2.UseVisualStyleBackColor = true;
+            btnCargarRichTxt2.Click += btnCargarRichTxt2_Click;
+            // 
+            // richTextBoxOrdenadaPorExist
+            // 
+            richTextBoxOrdenadaPorExist.Location = new Point(132, 14);
+            richTextBoxOrdenadaPorExist.Name = "richTextBoxOrdenadaPorExist";
+            richTextBoxOrdenadaPorExist.Size = new Size(169, 316);
+            richTextBoxOrdenadaPorExist.TabIndex = 1;
+            richTextBoxOrdenadaPorExist.Text = "";
+            // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(buttonMostrarTotalVentas);
+            tabPage5.Controls.Add(textBoxTotalVentas);
+            tabPage5.Location = new Point(4, 24);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(432, 367);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "tabPage5";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // buttonMostrarTotalVentas
+            // 
+            buttonMostrarTotalVentas.Location = new Point(189, 127);
+            buttonMostrarTotalVentas.Name = "buttonMostrarTotalVentas";
+            buttonMostrarTotalVentas.Size = new Size(75, 23);
+            buttonMostrarTotalVentas.TabIndex = 1;
+            buttonMostrarTotalVentas.Text = "Mostrar";
+            buttonMostrarTotalVentas.UseVisualStyleBackColor = true;
+            buttonMostrarTotalVentas.Click += buttonMostrarTotalVentas_Click;
+            // 
+            // textBoxTotalVentas
+            // 
+            textBoxTotalVentas.Location = new Point(173, 98);
+            textBoxTotalVentas.Name = "textBoxTotalVentas";
+            textBoxTotalVentas.Size = new Size(101, 23);
+            textBoxTotalVentas.TabIndex = 0;
+            textBoxTotalVentas.TextAlign = HorizontalAlignment.Center;
             // 
             // btnCerrarSesionAdmin
             // 
@@ -213,6 +283,9 @@
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             tabPage3.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -233,5 +306,11 @@
         private RichTextBox richTextBoxListado;
         private Button btnCargar;
         private Button btnCerrarSesionAdmin;
+        private TabPage tabPage4;
+        private Button btnCargarRichTxt2;
+        private RichTextBox richTextBoxOrdenadaPorExist;
+        private TabPage tabPage5;
+        private Button buttonMostrarTotalVentas;
+        private TextBox textBoxTotalVentas;
     }
 }

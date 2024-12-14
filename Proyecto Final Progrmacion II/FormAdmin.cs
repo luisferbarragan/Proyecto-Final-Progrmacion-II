@@ -77,5 +77,52 @@ namespace Proyecto_Final_Progrmacion_II
             f1.ShowDialog();
             this.Close();
         }
+
+        private void btnCargarRichTxt2_Click(object sender, EventArgs e)
+        {
+            DataBase obj = new DataBase();
+            listado = obj.consulta(); // Obtener los datos de la base de datos
+
+            // Ordenar la lista por existencias de menor a mayor
+            var listaOrdenada = listado.OrderBy(p => p.Exist).ToList();
+
+            // Limpiar el RichTextBox antes de mostrar los registros
+            this.richTextBoxOrdenadaPorExist.Clear();
+
+            // Mostrar los registros ordenados en el RichTextBox
+            listaOrdenada.ForEach(p =>
+            {
+                this.richTextBoxOrdenadaPorExist.AppendText(
+                    $"ID: {p.Id}\n" +
+                    $"Nombre Imagen: {p.NombreImg}\n" +
+                    $"Descripción: {p.Descripcion}\n" +
+                    $"Precio: {p.Precio}\n" +
+                    $"Existencias: {p.Exist}\n\n"
+                );
+            });
+
+            obj.Disconnect(); // Cerrar la conexión con la base de datos
+        }
+
+        private void buttonMostrarTotalVentas_Click(object sender, EventArgs e)
+        {
+            DataBase db = new DataBase();
+
+            try
+            {
+                double totalVentas = db.ObtenerTotalVentas();
+
+                // Mostrar el total en un TextBox (asegúrate de tener un TextBox, por ejemplo, llamado txtTotalVentas)
+                textBoxTotalVentas.Text = totalVentas.ToString("C"); // Formato de moneda
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al mostrar el total de ventas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                db.Disconnect();
+            }
+        }
     }
 }

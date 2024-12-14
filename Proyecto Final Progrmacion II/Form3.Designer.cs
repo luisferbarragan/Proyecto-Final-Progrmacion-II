@@ -36,6 +36,7 @@
             flowLayoutPanelCarrito = new FlowLayoutPanel();
             pictureBoxCarrito = new PictureBox();
             textBoxTotal = new TextBox();
+            buttonComprar = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCarrito).BeginInit();
@@ -43,12 +44,14 @@
             // 
             // btnCerrarSesionMenu
             // 
-            btnCerrarSesionMenu.Location = new Point(3, 31);
+            btnCerrarSesionMenu.BackColor = Color.AntiqueWhite;
+            btnCerrarSesionMenu.FlatStyle = FlatStyle.Flat;
+            btnCerrarSesionMenu.Location = new Point(13, 31);
             btnCerrarSesionMenu.Name = "btnCerrarSesionMenu";
-            btnCerrarSesionMenu.Size = new Size(112, 23);
+            btnCerrarSesionMenu.Size = new Size(91, 23);
             btnCerrarSesionMenu.TabIndex = 0;
             btnCerrarSesionMenu.Text = "Cerrar Sesión";
-            btnCerrarSesionMenu.UseVisualStyleBackColor = true;
+            btnCerrarSesionMenu.UseVisualStyleBackColor = false;
             btnCerrarSesionMenu.Click += btnCerrarSesion_Click;
             // 
             // flowLayoutPanelImages
@@ -63,6 +66,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.Chartreuse;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnCerrarSesionMenu);
             panel1.Location = new Point(338, 74);
@@ -73,12 +77,12 @@
             // 
             // label1
             // 
-            label1.Font = new Font("SugarPieW00-Regular", 8.999998F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Arial Narrow", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.ActiveCaptionText;
             label1.Location = new Point(1, 0);
             label1.Name = "label1";
             label1.Size = new Size(116, 30);
             label1.TabIndex = 0;
-            label1.Text = "1";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
@@ -103,7 +107,8 @@
             // 
             // pictureBoxCarrito
             // 
-            pictureBoxCarrito.Location = new Point(410, 630);
+            pictureBoxCarrito.Image = Properties.Resources.carrito;
+            pictureBoxCarrito.Location = new Point(406, 623);
             pictureBoxCarrito.Name = "pictureBoxCarrito";
             pictureBoxCarrito.Size = new Size(40, 40);
             pictureBoxCarrito.TabIndex = 5;
@@ -112,13 +117,30 @@
             // 
             // textBoxTotal
             // 
+            textBoxTotal.BackColor = Color.Chartreuse;
+            textBoxTotal.BorderStyle = BorderStyle.FixedSingle;
             textBoxTotal.Enabled = false;
-            textBoxTotal.Location = new Point(338, 587);
+            textBoxTotal.ForeColor = Color.Black;
+            textBoxTotal.Location = new Point(338, 583);
             textBoxTotal.Name = "textBoxTotal";
             textBoxTotal.ReadOnly = true;
             textBoxTotal.Size = new Size(112, 23);
             textBoxTotal.TabIndex = 6;
+            textBoxTotal.TextAlign = HorizontalAlignment.Right;
             textBoxTotal.Visible = false;
+            // 
+            // buttonComprar
+            // 
+            buttonComprar.BackColor = Color.Chartreuse;
+            buttonComprar.FlatStyle = FlatStyle.Flat;
+            buttonComprar.Location = new Point(223, 581);
+            buttonComprar.Name = "buttonComprar";
+            buttonComprar.Size = new Size(104, 29);
+            buttonComprar.TabIndex = 7;
+            buttonComprar.Text = "Comprar";
+            buttonComprar.UseVisualStyleBackColor = false;
+            buttonComprar.Visible = false;
+            buttonComprar.Click += buttonComprar_Click;
             // 
             // FormMenu
             // 
@@ -127,6 +149,7 @@
             BackgroundImage = Properties.Resources.pag_principal1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(464, 681);
+            Controls.Add(buttonComprar);
             Controls.Add(textBoxTotal);
             Controls.Add(pictureBoxCarrito);
             Controls.Add(pictureBox1);
@@ -155,5 +178,6 @@
         private FlowLayoutPanel flowLayoutPanelCarrito;
         private PictureBox pictureBoxCarrito;
         private TextBox textBoxTotal;
+        private Button buttonComprar;
     }
 }

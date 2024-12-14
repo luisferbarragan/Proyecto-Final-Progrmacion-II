@@ -63,6 +63,16 @@ namespace Proyecto_Final_Progrmacion_II.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap carrito {
+            get {
+                object obj = ResourceManager.GetObject("carrito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap color {
             get {
                 object obj = ResourceManager.GetObject("color", resourceCulture);

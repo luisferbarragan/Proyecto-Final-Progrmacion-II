@@ -142,8 +142,19 @@ namespace Proyecto_Final_Progrmacion_II
             string query = "";
             try
             {
-                query = "DELETE FROM productos WHERE id=" + idp + ";";
+                // Verificar la cantidad de productos en la base de datos
+                string countQuery = "SELECT COUNT(*) FROM productos";
+                MySqlCommand countCmd = new MySqlCommand(countQuery, connection);
+                int totalProductos = Convert.ToInt32(countCmd.ExecuteScalar());
 
+                if (totalProductos <= 6)
+                {
+                    MessageBox.Show("No se puede eliminar el producto. Debe haber al menos 6 productos en la base de datos.", "Restricción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Si hay más de 6 productos, proceder a eliminar
+                query = "DELETE FROM productos WHERE id=" + idp + ";";
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show(query + "\nRegistro Eliminado");
@@ -153,6 +164,89 @@ namespace Proyecto_Final_Progrmacion_II
                 MessageBox.Show(query + "\nError " + ex.Message);
                 this.Disconnect();
             }
+        }
+
+        public bool ActualizarMontoUsuario(int idUsuario, double monto)
+        {
+            try
+            {
+                string query = "UPDATE usuarios SET monto = monto + @Monto WHERE id = @IdUsuario";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Monto", monto);
+                command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al actualizar el monto del usuario: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public bool ReducirExistenciasProducto(int idProducto, int cantidad)
+        {
+            try
+            {
+                string query = "UPDATE productos SET existencias = existencias - @Cantidad WHERE id = @IdProducto AND existencias >= @Cantidad";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Cantidad", cantidad);
+                command.Parameters.AddWithValue("@IdProducto", idProducto);
+
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al reducir existencias del producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public bool RegistrarVenta(int idUsuario, double total, int totalPlayeras)
+        {
+            try
+            {
+                string query = "INSERT INTO ventas (idUsuario, total, cantidadPlayeras, fecha) VALUES (@IdUsuario, @Total, @CantidadPlayeras, NOW())";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                command.Parameters.AddWithValue("@Total", total);
+                command.Parameters.AddWithValue("@CantidadPlayeras", totalPlayeras);
+
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al registrar la venta: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public double ObtenerTotalVentas()
+        {
+            double totalVentas = 0;
+
+            try
+            {
+                string query = "SELECT SUM(total) AS TotalVentas FROM ventas";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read() && !reader.IsDBNull(0))
+                {
+                    totalVentas = reader.GetDouble("TotalVentas");
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al obtener el total de ventas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return totalVentas;
         }
     }
 }
