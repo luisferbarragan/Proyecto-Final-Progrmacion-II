@@ -63,6 +63,16 @@ namespace Proyecto_Final_Progrmacion_II.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _30_OFF {
+            get {
+                object obj = ResourceManager.GetObject("30_OFF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap admin {
             get {
                 object obj = ResourceManager.GetObject("admin", resourceCulture);
@@ -136,6 +146,16 @@ namespace Proyecto_Final_Progrmacion_II.Properties {
         internal static System.Drawing.Bitmap Logotipo_marca_de_productos_sustentables_ilustrado_verde {
             get {
                 object obj = ResourceManager.GetObject("Logotipo marca de productos sustentables ilustrado verde", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap nota_de_compra {
+            get {
+                object obj = ResourceManager.GetObject("nota_de_compra", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

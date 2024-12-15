@@ -24,6 +24,7 @@ namespace Proyecto_Final_Progrmacion_II
 
         public void FormMenu_Load(object sender, EventArgs e)
         {
+
             List<Productos> listado;
             List<string> imagenes = new List<string>();
             DataBase obj = new DataBase();
@@ -62,7 +63,7 @@ namespace Proyecto_Final_Progrmacion_II
                     // Create a PictureBox for the image
                     PictureBox pictureBox = new PictureBox
                     {
-                        Image = Image.FromFile(Path.Combine(imagesPath, producto.NombreImg)), // Load image from the constructed path
+                        Image = System.Drawing.Image.FromFile(Path.Combine(imagesPath, producto.NombreImg)), // Load image from the constructed path
                         SizeMode = PictureBoxSizeMode.StretchImage, // Adjust image scaling
                         Width = 220, // Set desired width
                         Height = 225, // Set desired height
@@ -91,7 +92,7 @@ namespace Proyecto_Final_Progrmacion_II
                         BackColor = Color.White, // Set the button color
                         ForeColor = Color.Black, // Set the text color
                         FlatStyle = FlatStyle.Flat, // Optional: Flat style for modern look
-                        BackgroundImage = Image.FromFile(Path.Combine(imagesPath, "info.png")),
+                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(imagesPath, "info.png")),
                         BackgroundImageLayout = ImageLayout.Stretch
                     };
                     button.FlatAppearance.BorderSize = 0; // Remove the border
@@ -113,7 +114,7 @@ namespace Proyecto_Final_Progrmacion_II
                         BackColor = Color.Green,
                         ForeColor = Color.White,
                         FlatStyle = FlatStyle.Flat,
-                        BackgroundImage = Image.FromFile(Path.Combine(imagesPath, "carrito.png")),
+                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(imagesPath, "carrito.png")),
                         BackgroundImageLayout = ImageLayout.Stretch
                     };
                     addToCartButton.FlatAppearance.BorderSize = 0;
@@ -232,7 +233,7 @@ namespace Proyecto_Final_Progrmacion_II
                         Width = 450, // Set width
                         Height = 75, // Set height
                         Margin = new Padding(0), // Add some spacing
-                        BackgroundImage = Image.FromFile(Path.Combine(imagesPath, nombreImgCarrito)), // Set the background image
+                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(imagesPath, nombreImgCarrito)), // Set the background image
                         BackgroundImageLayout = ImageLayout.Stretch // Stretch the image to fit the 
                     };
 
@@ -349,6 +350,8 @@ namespace Proyecto_Final_Progrmacion_II
                 textBoxTotal.Visible = true;
                 buttonComprar.Visible = true;
                 pictureBoxCarrito.BorderStyle = BorderStyle.Fixed3D;
+                textBoxCupon.Visible = true;
+                buttonAddCupon.Visible = true;
             }
             else
             {
@@ -357,6 +360,8 @@ namespace Proyecto_Final_Progrmacion_II
                 textBoxTotal.Visible = false;
                 buttonComprar.Visible = false;
                 pictureBoxCarrito.BorderStyle = BorderStyle.None;
+                textBoxCupon.Visible = false;
+                buttonAddCupon.Visible = false;
             }
         }
         private void ActualizarTotal()
@@ -364,6 +369,8 @@ namespace Proyecto_Final_Progrmacion_II
             double total = cart.Sum(item => item.producto.Precio * item.cantidad);
             textBoxTotal.Text = total.ToString("C");
         }
+
+        private double descuentoAplicado = 0.0;
 
         private void buttonComprar_Click(object sender, EventArgs e)
         {
@@ -375,12 +382,18 @@ namespace Proyecto_Final_Progrmacion_II
                     return;
                 }
 
-                
+
 
                 // Sumar el monto total
                 double total = cart.Sum(item => item.producto.Precio * item.cantidad);
+                if (descuentoAplicado > 0)
+                {
+                    total -= total * descuentoAplicado;
+                }
                 double totalConImpuesto = total + (total * 0.06);
                 int totalPlayeras = cart.Sum(item => item.cantidad);
+
+                
 
                 // Instancia de la base de datos
                 DataBase db = new DataBase();
@@ -423,6 +436,8 @@ namespace Proyecto_Final_Progrmacion_II
                 ActualizarTotal();
                 RefrescarDatos();
 
+
+
                 MessageBox.Show("Compra realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -452,5 +467,51 @@ namespace Proyecto_Final_Progrmacion_II
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string cuponIngresado = textBoxCupon.Text.Trim();
+
+                if (string.IsNullOrEmpty(cuponIngresado))
+                {
+                    MessageBox.Show("Por favor, ingrese un código de cupón.", "Cupón vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Lista de cupones válidos y sus descuentos (esto puede venir de una base de datos)
+                Dictionary<string, double> cuponesValidos = new Dictionary<string, double>
+                {
+                    { "NAVIDAD", 0.30 },
+                };
+
+                if (cuponesValidos.TryGetValue(cuponIngresado.ToUpper(), out double descuento))
+                {
+                    descuentoAplicado = descuento;
+                    // Aplicar el descuento
+                    double total = cart.Sum(item => item.producto.Precio * item.cantidad);
+                    double totalConDescuento = total - (total * descuento);
+                    total = totalConDescuento;
+
+                    textBoxTotal.Text = totalConDescuento.ToString("C");
+
+                    MessageBox.Show($"El cupón se aplicó correctamente. Descuento del {descuento * 100:F0}%.", "Cupón válido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("El cupón ingresado no es válido. Intente nuevamente.", "Cupón inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hubo un error al aplicar el cupón: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonCerrarDescuento_Click(object sender, EventArgs e)
+        {
+            pictureBoxDescuento.Visible = false;
+            buttonCerrarDescuento.Visible = false;
+        }
     }
 }

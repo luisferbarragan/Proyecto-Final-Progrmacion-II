@@ -32,15 +32,20 @@
             flowLayoutPanelImages = new FlowLayoutPanel();
             panel1 = new Panel();
             label1 = new Label();
+            lblHoraFecha = new Label();
             pictureBox1 = new PictureBox();
             flowLayoutPanelCarrito = new FlowLayoutPanel();
             pictureBoxCarrito = new PictureBox();
             textBoxTotal = new TextBox();
             buttonComprar = new Button();
-            lblHoraFecha = new Label();
+            textBoxCupon = new TextBox();
+            buttonAddCupon = new Button();
+            pictureBoxDescuento = new PictureBox();
+            buttonCerrarDescuento = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCarrito).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxDescuento).BeginInit();
             SuspendLayout();
             // 
             // btnCerrarSesionMenu
@@ -50,7 +55,7 @@
             btnCerrarSesionMenu.FlatAppearance.BorderSize = 0;
             btnCerrarSesionMenu.FlatStyle = FlatStyle.Flat;
             btnCerrarSesionMenu.ForeColor = Color.WhiteSmoke;
-            btnCerrarSesionMenu.Location = new Point(13, 31);
+            btnCerrarSesionMenu.Location = new Point(13, 69);
             btnCerrarSesionMenu.Name = "btnCerrarSesionMenu";
             btnCerrarSesionMenu.Size = new Size(91, 23);
             btnCerrarSesionMenu.TabIndex = 0;
@@ -73,9 +78,10 @@
             panel1.BackColor = Color.Chartreuse;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnCerrarSesionMenu);
+            panel1.Controls.Add(lblHoraFecha);
             panel1.Location = new Point(338, 74);
             panel1.Name = "panel1";
-            panel1.Size = new Size(118, 61);
+            panel1.Size = new Size(118, 100);
             panel1.TabIndex = 2;
             panel1.Visible = false;
             // 
@@ -88,6 +94,17 @@
             label1.Size = new Size(116, 30);
             label1.TabIndex = 0;
             label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblHoraFecha
+            // 
+            lblHoraFecha.AutoSize = true;
+            lblHoraFecha.BackColor = Color.Chartreuse;
+            lblHoraFecha.Location = new Point(21, 31);
+            lblHoraFecha.Name = "lblHoraFecha";
+            lblHoraFecha.Size = new Size(76, 15);
+            lblHoraFecha.TabIndex = 8;
+            lblHoraFecha.Text = "Fecha y Hora";
+            lblHoraFecha.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
@@ -105,7 +122,7 @@
             flowLayoutPanelCarrito.BackgroundImage = Properties.Resources.color2;
             flowLayoutPanelCarrito.Location = new Point(11, 92);
             flowLayoutPanelCarrito.Name = "flowLayoutPanelCarrito";
-            flowLayoutPanelCarrito.Size = new Size(477, 482);
+            flowLayoutPanelCarrito.Size = new Size(477, 425);
             flowLayoutPanelCarrito.TabIndex = 4;
             flowLayoutPanelCarrito.Visible = false;
             // 
@@ -126,7 +143,7 @@
             textBoxTotal.BorderStyle = BorderStyle.FixedSingle;
             textBoxTotal.Enabled = false;
             textBoxTotal.ForeColor = Color.Black;
-            textBoxTotal.Location = new Point(338, 583);
+            textBoxTotal.Location = new Point(338, 524);
             textBoxTotal.Name = "textBoxTotal";
             textBoxTotal.ReadOnly = true;
             textBoxTotal.Size = new Size(112, 23);
@@ -137,8 +154,9 @@
             // buttonComprar
             // 
             buttonComprar.BackColor = Color.Chartreuse;
+            buttonComprar.FlatAppearance.BorderSize = 0;
             buttonComprar.FlatStyle = FlatStyle.Flat;
-            buttonComprar.Location = new Point(223, 581);
+            buttonComprar.Location = new Point(343, 582);
             buttonComprar.Name = "buttonComprar";
             buttonComprar.Size = new Size(104, 29);
             buttonComprar.TabIndex = 7;
@@ -147,17 +165,55 @@
             buttonComprar.Visible = false;
             buttonComprar.Click += buttonComprar_Click;
             // 
-            // lblHoraFecha
+            // textBoxCupon
             // 
-            lblHoraFecha.AutoSize = true;
-            lblHoraFecha.BackColor = Color.Chartreuse;
-            lblHoraFecha.BorderStyle = BorderStyle.FixedSingle;
-            lblHoraFecha.Location = new Point(16, 634);
-            lblHoraFecha.Name = "lblHoraFecha";
-            lblHoraFecha.Size = new Size(78, 17);
-            lblHoraFecha.TabIndex = 8;
-            lblHoraFecha.Text = "Fecha y Hora";
-            lblHoraFecha.TextAlign = ContentAlignment.MiddleCenter;
+            textBoxCupon.BackColor = Color.Chartreuse;
+            textBoxCupon.BorderStyle = BorderStyle.None;
+            textBoxCupon.Location = new Point(335, 556);
+            textBoxCupon.Name = "textBoxCupon";
+            textBoxCupon.PlaceholderText = "Cupon";
+            textBoxCupon.Size = new Size(115, 16);
+            textBoxCupon.TabIndex = 9;
+            textBoxCupon.Visible = false;
+            // 
+            // buttonAddCupon
+            // 
+            buttonAddCupon.BackColor = Color.Chartreuse;
+            buttonAddCupon.FlatAppearance.BorderSize = 0;
+            buttonAddCupon.FlatStyle = FlatStyle.Flat;
+            buttonAddCupon.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonAddCupon.ForeColor = Color.Black;
+            buttonAddCupon.Location = new Point(279, 551);
+            buttonAddCupon.Name = "buttonAddCupon";
+            buttonAddCupon.Size = new Size(48, 26);
+            buttonAddCupon.TabIndex = 10;
+            buttonAddCupon.Text = "Add";
+            buttonAddCupon.UseVisualStyleBackColor = false;
+            buttonAddCupon.Visible = false;
+            buttonAddCupon.Click += button1_Click;
+            // 
+            // pictureBoxDescuento
+            // 
+            pictureBoxDescuento.Image = Properties.Resources._30_OFF;
+            pictureBoxDescuento.Location = new Point(38, 106);
+            pictureBoxDescuento.Name = "pictureBoxDescuento";
+            pictureBoxDescuento.Size = new Size(400, 400);
+            pictureBoxDescuento.TabIndex = 11;
+            pictureBoxDescuento.TabStop = false;
+            // 
+            // buttonCerrarDescuento
+            // 
+            buttonCerrarDescuento.BackColor = Color.Chartreuse;
+            buttonCerrarDescuento.FlatAppearance.BorderSize = 0;
+            buttonCerrarDescuento.FlatStyle = FlatStyle.Flat;
+            buttonCerrarDescuento.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonCerrarDescuento.Location = new Point(379, 480);
+            buttonCerrarDescuento.Name = "buttonCerrarDescuento";
+            buttonCerrarDescuento.Size = new Size(48, 20);
+            buttonCerrarDescuento.TabIndex = 12;
+            buttonCerrarDescuento.Text = "Cerrar";
+            buttonCerrarDescuento.UseVisualStyleBackColor = false;
+            buttonCerrarDescuento.Click += buttonCerrarDescuento_Click;
             // 
             // FormMenu
             // 
@@ -166,12 +222,15 @@
             BackgroundImage = Properties.Resources.pag_principal1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(464, 681);
-            Controls.Add(lblHoraFecha);
+            Controls.Add(panel1);
+            Controls.Add(buttonCerrarDescuento);
+            Controls.Add(pictureBoxDescuento);
+            Controls.Add(buttonAddCupon);
+            Controls.Add(textBoxCupon);
             Controls.Add(buttonComprar);
             Controls.Add(textBoxTotal);
             Controls.Add(pictureBoxCarrito);
             Controls.Add(pictureBox1);
-            Controls.Add(panel1);
             Controls.Add(flowLayoutPanelCarrito);
             Controls.Add(flowLayoutPanelImages);
             DoubleBuffered = true;
@@ -180,8 +239,10 @@
             Text = "Menu";
             Load += FormMenu_Load;
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCarrito).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxDescuento).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -198,5 +259,9 @@
         private TextBox textBoxTotal;
         private Button buttonComprar;
         private Label lblHoraFecha;
+        private TextBox textBoxCupon;
+        private Button buttonAddCupon;
+        private PictureBox pictureBoxDescuento;
+        private Button buttonCerrarDescuento;
     }
 }

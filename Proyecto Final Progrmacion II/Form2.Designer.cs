@@ -59,6 +59,8 @@
             // buttonIngresar
             // 
             buttonIngresar.BackColor = Color.Chartreuse;
+            buttonIngresar.FlatAppearance.BorderSize = 0;
+            buttonIngresar.FlatStyle = FlatStyle.Flat;
             buttonIngresar.Location = new Point(146, 524);
             buttonIngresar.Name = "buttonIngresar";
             buttonIngresar.Size = new Size(180, 29);
