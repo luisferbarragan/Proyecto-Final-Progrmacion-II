@@ -91,7 +91,7 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(382, 419);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
+            tabPage1.Text = "Bajas";
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += tabPage1_Click;
             // 
@@ -119,7 +119,7 @@
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(382, 419);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
+            tabPage2.Text = "Altas";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtAgregarId
@@ -188,7 +188,7 @@
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(382, 419);
             tabPage3.TabIndex = 2;
-            tabPage3.Text = "tabPage3";
+            tabPage3.Text = "Listado";
             tabPage3.UseVisualStyleBackColor = true;
             // 
             // btnCargar
@@ -221,7 +221,7 @@
             tabPage4.Padding = new Padding(3);
             tabPage4.Size = new Size(382, 419);
             tabPage4.TabIndex = 3;
-            tabPage4.Text = "tabPage4";
+            tabPage4.Text = "ListadoExistencias";
             tabPage4.UseVisualStyleBackColor = true;
             // 
             // btnCargarRichTxt2
@@ -254,7 +254,7 @@
             tabPage5.Padding = new Padding(3);
             tabPage5.Size = new Size(382, 419);
             tabPage5.TabIndex = 4;
-            tabPage5.Text = "tabPage5";
+            tabPage5.Text = "TotalVentas";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // buttonMostrarTotalVentas
