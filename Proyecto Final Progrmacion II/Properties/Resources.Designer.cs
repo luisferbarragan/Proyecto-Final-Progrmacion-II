@@ -83,6 +83,16 @@ namespace Proyecto_Final_Progrmacion_II.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap buzon {
+            get {
+                object obj = ResourceManager.GetObject("buzon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap carrito {
             get {
                 object obj = ResourceManager.GetObject("carrito", resourceCulture);
@@ -136,6 +146,26 @@ namespace Proyecto_Final_Progrmacion_II.Properties {
         internal static System.Drawing.Bitmap color3 {
             get {
                 object obj = ResourceManager.GetObject("color3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap color4 {
+            get {
+                object obj = ResourceManager.GetObject("color4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap feedabck {
+            get {
+                object obj = ResourceManager.GetObject("feedabck", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

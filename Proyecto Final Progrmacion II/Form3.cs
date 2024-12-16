@@ -118,7 +118,16 @@ namespace Proyecto_Final_Progrmacion_II
                         BackgroundImageLayout = ImageLayout.Stretch
                     };
                     addToCartButton.FlatAppearance.BorderSize = 0;
-                    addToCartButton.Click += (s, e) => AddToCart(producto);
+                    int existenciasActuales = producto.Exist;
+                    addToCartButton.Click += (s, e) =>
+                    {
+                        if (producto.Exist > 0 && existenciasActuales > 0)
+                        {
+                            existenciasActuales--;
+                            AddToCart(producto);
+                        }
+                        else MessageBox.Show("Los sentimos, no puedes agregar este producto a tu compra.");
+                    };
 
                     panel.Controls.Add(addToCartButton);
                     // Add the Label and Button to the PictureBox
@@ -170,7 +179,8 @@ namespace Proyecto_Final_Progrmacion_II
                 Width = 220,
                 Height = 100,
                 Margin = new Padding(0),
-                BorderStyle = BorderStyle.FixedSingle
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = Color.Chartreuse,
             };
 
             Label priceLabel = new Label
@@ -202,11 +212,11 @@ namespace Proyecto_Final_Progrmacion_II
                 Text = "Cerrar",
                 Size = new Size(60, 30),
                 Location = new Point(80, 60),
-                BackColor = Color.White,
-                ForeColor = Color.Black,
-                FlatStyle = FlatStyle.Flat
+                BackColor = Color.MediumSlateBlue,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
             };
-            closeButton.FlatAppearance.BorderSize = 1;
+            closeButton.FlatAppearance.BorderSize = 0;
             closeButton.Click += (s, e) => infoPanel.Visible = false;
 
             infoPanel.Controls.Add(priceLabel);
@@ -393,7 +403,7 @@ namespace Proyecto_Final_Progrmacion_II
                 double totalConImpuesto = total + (total * 0.06);
                 int totalPlayeras = cart.Sum(item => item.cantidad);
 
-                
+
 
                 // Instancia de la base de datos
                 DataBase db = new DataBase();
@@ -512,6 +522,43 @@ namespace Proyecto_Final_Progrmacion_II
         {
             pictureBoxDescuento.Visible = false;
             buttonCerrarDescuento.Visible = false;
+        }
+
+        private void buttonSubmit_Click(object sender, EventArgs e)
+        {
+            string nombre = textBoxNombreQueja.Text.Trim();
+            string apellido = textBoxApellidoQueja.Text.Trim();
+            string texto = richTextBoxQueja.Text.Trim();
+
+            // Validar que los campos no estén vacíos
+            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(texto))
+            {
+                MessageBox.Show("Por favor, rellene todos los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Insertar los datos en la base de datos
+            DataBase db = new DataBase();
+            db.InsertarQueja(nombre, apellido, texto);
+            db.Disconnect();
+
+            // Limpiar los campos después de la inserción
+            
+            textBoxNombreQueja.Clear();
+            textBoxApellidoQueja.Clear();
+            richTextBoxQueja.Clear();
+        }
+
+        private void pictureBoxQuejas_Click(object sender, EventArgs e)
+        {
+            if (panelQuejas.Visible == true)
+            {
+                panelQuejas.Visible = false;
+            }
+            else
+            {
+                panelQuejas.Visible=true;
+            }
         }
     }
 }

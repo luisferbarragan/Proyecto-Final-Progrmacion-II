@@ -48,6 +48,7 @@
             tabPage5 = new TabPage();
             buttonMostrarTotalVentas = new Button();
             textBoxTotalVentas = new TextBox();
+            tabPage6 = new TabPage();
             btnCerrarSesionAdmin = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -60,6 +61,9 @@
             // btnEliminar
             // 
             btnEliminar.BackColor = Color.Chartreuse;
+            btnEliminar.FlatAppearance.BorderSize = 0;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.ForeColor = Color.Black;
             btnEliminar.Location = new Point(156, 132);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(75, 23);
@@ -75,6 +79,7 @@
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Controls.Add(tabPage5);
+            tabControl1.Controls.Add(tabPage6);
             tabControl1.Location = new Point(38, 135);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -277,9 +282,22 @@
             textBoxTotalVentas.TabIndex = 0;
             textBoxTotalVentas.TextAlign = HorizontalAlignment.Center;
             // 
+            // tabPage6
+            // 
+            tabPage6.BackgroundImage = Properties.Resources.color2oscuro;
+            tabPage6.Location = new Point(4, 24);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new Padding(3);
+            tabPage6.Size = new Size(382, 419);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "Grafica";
+            tabPage6.UseVisualStyleBackColor = true;
+            // 
             // btnCerrarSesionAdmin
             // 
             btnCerrarSesionAdmin.BackColor = Color.Chartreuse;
+            btnCerrarSesionAdmin.FlatAppearance.BorderSize = 0;
+            btnCerrarSesionAdmin.FlatStyle = FlatStyle.Flat;
             btnCerrarSesionAdmin.Location = new Point(355, 636);
             btnCerrarSesionAdmin.Name = "btnCerrarSesionAdmin";
             btnCerrarSesionAdmin.Size = new Size(91, 23);
@@ -301,6 +319,7 @@
             Name = "FormAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin";
+            Load += cargarGrafica;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
@@ -336,5 +355,6 @@
         private TabPage tabPage5;
         private Button buttonMostrarTotalVentas;
         private TextBox textBoxTotalVentas;
+        private TabPage tabPage6;
     }
 }

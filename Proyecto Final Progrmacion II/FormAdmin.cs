@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using OxyPlot;
+using OxyPlot.Series;
+using OxyPlot.WindowsForms;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace Proyecto_Final_Progrmacion_II
 {
@@ -19,6 +23,49 @@ namespace Proyecto_Final_Progrmacion_II
         {
             InitializeComponent();
         }
+
+        private void cargarGrafica(object sender, EventArgs e)
+        {
+            DataBase obj = new DataBase();
+            listado = obj.consulta();
+
+            var plotView1 = new PlotView
+            {
+                Dock = DockStyle.Fill,
+            };
+            // Crear el modelo de gráfico
+            var model = new PlotModel { Title = "Inventario", Padding = new OxyThickness(100, 100, 100, 100) };
+            var pieSeries = new PieSeries
+            {
+                StrokeThickness = 1.0,
+                AngleSpan = 360,
+                StartAngle = 0,
+                InsideLabelPosition = 1,
+                OutsideLabelFormat = "{1}: {0} %",
+                InsideLabelFormat = string.Empty,
+                FontSize = 12,
+            };
+
+            var random = new Random();
+
+            listado.ForEach(p =>
+            {
+                var color = OxyColor.FromRgb(
+                (byte)random.Next(0, 256), 
+                (byte)random.Next(0, 256), 
+                (byte)random.Next(0, 256) 
+                );
+                pieSeries.Slices.Add(new PieSlice(p.NombreImg.Remove(p.NombreImg.Length - 4,4), p.Exist) { Fill = color});
+            });
+
+            // Añadir la serie al modelo
+            model.Series.Add(pieSeries);
+            // Asignar el modelo al PlotView
+            plotView1.Model = model;
+            tabPage6.Controls.Add(plotView1);
+            obj.Disconnect();
+        }
+
         public void limpiar()
         {
             this.txtAgregarId.PlaceholderText = "ID";
@@ -81,15 +128,10 @@ namespace Proyecto_Final_Progrmacion_II
         private void btnCargarRichTxt2_Click(object sender, EventArgs e)
         {
             DataBase obj = new DataBase();
-            listado = obj.consulta(); // Obtener los datos de la base de datos
-
-            // Ordenar la lista por existencias de menor a mayor
+            listado = obj.consulta();
             var listaOrdenada = listado.OrderBy(p => p.Exist).ToList();
-
-            // Limpiar el RichTextBox antes de mostrar los registros
             this.richTextBoxOrdenadaPorExist.Clear();
 
-            // Mostrar los registros ordenados en el RichTextBox
             listaOrdenada.ForEach(p =>
             {
                 this.richTextBoxOrdenadaPorExist.AppendText(
@@ -101,7 +143,7 @@ namespace Proyecto_Final_Progrmacion_II
                 );
             });
 
-            obj.Disconnect(); // Cerrar la conexión con la base de datos
+            obj.Disconnect();
         }
 
         private void buttonMostrarTotalVentas_Click(object sender, EventArgs e)
@@ -111,9 +153,7 @@ namespace Proyecto_Final_Progrmacion_II
             try
             {
                 double totalVentas = db.ObtenerTotalVentas();
-
-                // Mostrar el total en un TextBox (asegúrate de tener un TextBox, por ejemplo, llamado txtTotalVentas)
-                textBoxTotalVentas.Text = totalVentas.ToString("C"); // Formato de moneda
+                textBoxTotalVentas.Text = totalVentas.ToString("C");
             }
             catch (Exception ex)
             {

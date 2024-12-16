@@ -248,6 +248,25 @@ namespace Proyecto_Final_Progrmacion_II
 
             return totalVentas;
         }
+        public void InsertarQueja(string nombre, string apellido, string texto)
+        {
+            string query = "INSERT INTO sugerencias (nombre, apellido, texto) VALUES (@nombre, @apellido, @texto);";
+            try
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@apellido", apellido);
+                    cmd.Parameters.AddWithValue("@texto", texto);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al insertar la queja: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
 

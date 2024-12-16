@@ -42,10 +42,18 @@
             buttonAddCupon = new Button();
             pictureBoxDescuento = new PictureBox();
             buttonCerrarDescuento = new Button();
+            pictureBoxQuejas = new PictureBox();
+            panelQuejas = new Panel();
+            buttonSubmit = new Button();
+            textBoxApellidoQueja = new TextBox();
+            textBoxNombreQueja = new TextBox();
+            richTextBoxQueja = new RichTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCarrito).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDescuento).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxQuejas).BeginInit();
+            panelQuejas.SuspendLayout();
             SuspendLayout();
             // 
             // btnCerrarSesionMenu
@@ -215,6 +223,70 @@
             buttonCerrarDescuento.UseVisualStyleBackColor = false;
             buttonCerrarDescuento.Click += buttonCerrarDescuento_Click;
             // 
+            // pictureBoxQuejas
+            // 
+            pictureBoxQuejas.BackgroundImage = Properties.Resources.buzon;
+            pictureBoxQuejas.Location = new Point(367, 29);
+            pictureBoxQuejas.Name = "pictureBoxQuejas";
+            pictureBoxQuejas.Size = new Size(40, 40);
+            pictureBoxQuejas.TabIndex = 13;
+            pictureBoxQuejas.TabStop = false;
+            pictureBoxQuejas.Click += pictureBoxQuejas_Click;
+            // 
+            // panelQuejas
+            // 
+            panelQuejas.BackgroundImage = Properties.Resources.feedabck;
+            panelQuejas.BorderStyle = BorderStyle.FixedSingle;
+            panelQuejas.Controls.Add(buttonSubmit);
+            panelQuejas.Controls.Add(textBoxApellidoQueja);
+            panelQuejas.Controls.Add(textBoxNombreQueja);
+            panelQuejas.Controls.Add(richTextBoxQueja);
+            panelQuejas.Location = new Point(39, 106);
+            panelQuejas.Name = "panelQuejas";
+            panelQuejas.Size = new Size(400, 400);
+            panelQuejas.TabIndex = 14;
+            panelQuejas.Visible = false;
+            // 
+            // buttonSubmit
+            // 
+            buttonSubmit.BackColor = Color.MediumSlateBlue;
+            buttonSubmit.BackgroundImageLayout = ImageLayout.None;
+            buttonSubmit.FlatAppearance.BorderSize = 0;
+            buttonSubmit.FlatStyle = FlatStyle.Flat;
+            buttonSubmit.ForeColor = Color.WhiteSmoke;
+            buttonSubmit.Location = new Point(154, 365);
+            buttonSubmit.Name = "buttonSubmit";
+            buttonSubmit.Size = new Size(91, 23);
+            buttonSubmit.TabIndex = 3;
+            buttonSubmit.Text = "Submit";
+            buttonSubmit.UseVisualStyleBackColor = false;
+            buttonSubmit.Click += buttonSubmit_Click;
+            // 
+            // textBoxApellidoQueja
+            // 
+            textBoxApellidoQueja.BorderStyle = BorderStyle.None;
+            textBoxApellidoQueja.Location = new Point(30, 145);
+            textBoxApellidoQueja.Name = "textBoxApellidoQueja";
+            textBoxApellidoQueja.Size = new Size(338, 16);
+            textBoxApellidoQueja.TabIndex = 2;
+            // 
+            // textBoxNombreQueja
+            // 
+            textBoxNombreQueja.BorderStyle = BorderStyle.None;
+            textBoxNombreQueja.Location = new Point(30, 90);
+            textBoxNombreQueja.Name = "textBoxNombreQueja";
+            textBoxNombreQueja.Size = new Size(338, 16);
+            textBoxNombreQueja.TabIndex = 1;
+            // 
+            // richTextBoxQueja
+            // 
+            richTextBoxQueja.BorderStyle = BorderStyle.None;
+            richTextBoxQueja.Location = new Point(30, 197);
+            richTextBoxQueja.Name = "richTextBoxQueja";
+            richTextBoxQueja.Size = new Size(338, 148);
+            richTextBoxQueja.TabIndex = 0;
+            richTextBoxQueja.Text = "";
+            // 
             // FormMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -223,6 +295,8 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(464, 681);
             Controls.Add(panel1);
+            Controls.Add(panelQuejas);
+            Controls.Add(pictureBoxQuejas);
             Controls.Add(buttonCerrarDescuento);
             Controls.Add(pictureBoxDescuento);
             Controls.Add(buttonAddCupon);
@@ -243,6 +317,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCarrito).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDescuento).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxQuejas).EndInit();
+            panelQuejas.ResumeLayout(false);
+            panelQuejas.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -263,5 +340,11 @@
         private Button buttonAddCupon;
         private PictureBox pictureBoxDescuento;
         private Button buttonCerrarDescuento;
+        private PictureBox pictureBoxQuejas;
+        private Panel panelQuejas;
+        private Button buttonSubmit;
+        private TextBox textBoxApellidoQueja;
+        private TextBox textBoxNombreQueja;
+        private RichTextBox richTextBoxQueja;
     }
 }
