@@ -22,7 +22,7 @@ namespace Proyecto_Final_Progrmacion_II
             {
                 connection = new MySqlConnection(cadena);
                 connection.Open();
-                MessageBox.Show("Conexión establecida exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Conexión establecida exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -35,43 +35,11 @@ namespace Proyecto_Final_Progrmacion_II
             if (connection != null && connection.State == System.Data.ConnectionState.Open)
             {
                 connection.Close();
-                MessageBox.Show("Conexión cerrada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Conexión cerrada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        public List<Productos> consulta()
-        {
-            List<Productos> data = new List<Productos>();
-            try
-            {
-                string query = "SELECT id, nombreimg, descripcion, precio, existencias FROM productos";
-                MySqlCommand command = new MySqlCommand(query, this.connection);
-
-                // Ejecutar la consulta y leer los resultados
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    // Mapear los datos de la consulta a la clase Productos
-                    int id = Convert.ToInt32(reader["id"]);
-                    string nombreImg = Convert.ToString(reader["nombreimg"]) ?? "";
-                    string descripcion = Convert.ToString(reader["descripcion"]) ?? "";
-                    double precio = Convert.ToDouble(reader["precio"]);
-                    int exist = Convert.ToInt32(reader["existencias"]);
-
-                    Productos item = new Productos(id, nombreImg, descripcion, precio, exist);
-                    data.Add(item);
-                }
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al leer la tabla de la base de datos: " + ex.Message);
-                this.Disconnect();
-            }
-            return data;
-        }
-
-        public Usuarios consultarUsuarioContra(string cuenta, string contrasena)
+        public Usuarios consultarUsuarioContra(string cuenta, string contrasena)//Acceder: Retorna
         {
             Usuarios aux = null;
             int id;
@@ -111,7 +79,39 @@ namespace Proyecto_Final_Progrmacion_II
             return aux;
         }
 
-        public void insertar(int idp, string img, string des, double price, int ex)
+        public List<Productos> consulta()
+        {
+            List<Productos> data = new List<Productos>();
+            try
+            {
+                string query = "SELECT id, nombreimg, descripcion, precio, existencias FROM productos";
+                MySqlCommand command = new MySqlCommand(query, this.connection);
+
+                // Ejecutar la consulta y leer los resultados
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    // Mapear los datos de la consulta a la clase Productos
+                    int id = Convert.ToInt32(reader["id"]);
+                    string nombreImg = Convert.ToString(reader["nombreimg"]) ?? "";
+                    string descripcion = Convert.ToString(reader["descripcion"]) ?? "";
+                    double precio = Convert.ToDouble(reader["precio"]);
+                    int exist = Convert.ToInt32(reader["existencias"]);
+
+                    Productos item = new Productos(id, nombreImg, descripcion, precio, exist);
+                    data.Add(item);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al leer la tabla de la base de datos: " + ex.Message);
+                this.Disconnect();
+            }
+            return data;
+        }
+
+        public void insertar(int idp, string img, string des, double price, int ex)//Altas
         {
             string query = "INSERT INTO productos (id, nombreimg, descripcion, precio, existencias) VALUES (@id, @img, @des, @price, @ex)";
             try
@@ -137,12 +137,11 @@ namespace Proyecto_Final_Progrmacion_II
             }
         }
 
-        public void eliminar(int idp)
+        public void eliminar(int idp)//Bajas
         {
             string query = "";
             try
             {
-                // Verificar la cantidad de productos en la base de datos
                 string countQuery = "SELECT COUNT(*) FROM productos";
                 MySqlCommand countCmd = new MySqlCommand(countQuery, connection);
                 int totalProductos = Convert.ToInt32(countCmd.ExecuteScalar());
@@ -171,12 +170,12 @@ namespace Proyecto_Final_Progrmacion_II
             try
             {
                 string query = "UPDATE usuarios SET monto = monto + @Monto WHERE id = @IdUsuario";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Monto", monto);
-                command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                MySqlCommand comando = new MySqlCommand(query, connection);
+                comando.Parameters.AddWithValue("@Monto", monto);
+                comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
 
-                int rowsAffected = command.ExecuteNonQuery();
-                return rowsAffected > 0;
+                int columnasAfectadas = comando.ExecuteNonQuery();
+                return columnasAfectadas > 0;
             }
             catch (Exception ex)
             {
@@ -190,12 +189,12 @@ namespace Proyecto_Final_Progrmacion_II
             try
             {
                 string query = "UPDATE productos SET existencias = existencias - @Cantidad WHERE id = @IdProducto AND existencias >= @Cantidad";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Cantidad", cantidad);
-                command.Parameters.AddWithValue("@IdProducto", idProducto);
+                MySqlCommand comando = new MySqlCommand(query, connection);
+                comando.Parameters.AddWithValue("@Cantidad", cantidad);
+                comando.Parameters.AddWithValue("@IdProducto", idProducto);
 
-                int rowsAffected = command.ExecuteNonQuery();
-                return rowsAffected > 0;
+                int columnasAfectadas = comando.ExecuteNonQuery();
+                return columnasAfectadas > 0;
             }
             catch (Exception ex)
             {

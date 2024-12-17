@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPortadaUAA));
             pictureBoxPortadaUAA = new PictureBox();
             btnContinuarPortadaUAA = new Button();
+            buttonSalir = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxPortadaUAA).BeginInit();
             SuspendLayout();
             // 
@@ -58,11 +59,25 @@
             btnContinuarPortadaUAA.UseVisualStyleBackColor = false;
             btnContinuarPortadaUAA.Click += btnContinuarPortadaUAA_Click;
             // 
+            // buttonSalir
+            // 
+            buttonSalir.BackColor = Color.FromArgb(32, 44, 84);
+            buttonSalir.FlatStyle = FlatStyle.Flat;
+            buttonSalir.ForeColor = SystemColors.ButtonHighlight;
+            buttonSalir.Location = new Point(367, 645);
+            buttonSalir.Name = "buttonSalir";
+            buttonSalir.Size = new Size(85, 27);
+            buttonSalir.TabIndex = 2;
+            buttonSalir.Text = "Salir";
+            buttonSalir.UseVisualStyleBackColor = false;
+            buttonSalir.Click += buttonSalir_Click;
+            // 
             // FormPortadaUAA
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(464, 681);
+            Controls.Add(buttonSalir);
             Controls.Add(btnContinuarPortadaUAA);
             Controls.Add(pictureBoxPortadaUAA);
             Name = "FormPortadaUAA";
@@ -76,5 +91,6 @@
 
         private PictureBox pictureBoxPortadaUAA;
         private Button btnContinuarPortadaUAA;
+        private Button buttonSalir;
     }
 }

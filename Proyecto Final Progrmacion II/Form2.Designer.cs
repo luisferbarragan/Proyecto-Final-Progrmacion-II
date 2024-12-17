@@ -32,6 +32,7 @@
             txtAccederContrasena = new TextBox();
             buttonIngresar = new Button();
             pictureBox1 = new PictureBox();
+            buttonSalir = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             buttonIngresar.Location = new Point(146, 524);
             buttonIngresar.Name = "buttonIngresar";
             buttonIngresar.Size = new Size(180, 29);
-            buttonIngresar.TabIndex = 0;
+            buttonIngresar.TabIndex = 2;
             buttonIngresar.Text = "Ingresar";
             buttonIngresar.UseVisualStyleBackColor = false;
             buttonIngresar.Click += buttonIngresar_Click;
@@ -80,11 +81,25 @@
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
+            // buttonSalir
+            // 
+            buttonSalir.BackColor = Color.Chartreuse;
+            buttonSalir.FlatAppearance.BorderSize = 0;
+            buttonSalir.FlatStyle = FlatStyle.Flat;
+            buttonSalir.Location = new Point(358, 647);
+            buttonSalir.Name = "buttonSalir";
+            buttonSalir.Size = new Size(95, 24);
+            buttonSalir.TabIndex = 0;
+            buttonSalir.Text = "Salir";
+            buttonSalir.UseVisualStyleBackColor = false;
+            buttonSalir.Click += buttonSalir_Click;
+            // 
             // FormIngresoUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(464, 681);
+            Controls.Add(buttonSalir);
             Controls.Add(buttonIngresar);
             Controls.Add(txtAccederUsuario);
             Controls.Add(txtAccederContrasena);
@@ -103,5 +118,6 @@
         private TextBox txtAccederContrasena;
         private Button buttonIngresar;
         private PictureBox pictureBox1;
+        private Button buttonSalir;
     }
 }

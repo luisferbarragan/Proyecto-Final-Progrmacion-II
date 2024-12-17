@@ -20,8 +20,6 @@ namespace Proyecto_Final_Progrmacion_II
         public FormNotaCompra(DateTime fechaHora, List<(Productos producto, int cantidad)> productos, double totalConImpuesto)
         {
             InitializeComponent();
-
-            // Mostrar la fecha y hora
             lblFechaHora.Text = fechaHora.ToString("dd/MM/yyyy HH:mm:ss");
 
  
@@ -30,11 +28,10 @@ namespace Proyecto_Final_Progrmacion_II
             doc.Open();
             try
             {
-                // Cambia la ruta de la imagen a la que necesites
                 string logoPath = "arriba.png";
                 iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(logoPath);
-                logo.ScaleToFit(530f, 200f); // Escalar la imagen si es necesario
-                doc.Add(logo); // Agregar la imagen al documento
+                logo.ScaleToFit(530f, 200f);
+                doc.Add(logo);
             }
             catch (Exception ex)
             {
@@ -68,11 +65,10 @@ namespace Proyecto_Final_Progrmacion_II
             doc.Add(new Paragraph("Total (IVA incluido): " + totalConImpuesto));
             try
             {
-                // Cambia la ruta de la imagen a la que necesites
                 string logoPath = "abajo.png";
                 iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(logoPath);
-                logo.ScaleToFit(530f, 200f); // Escalar la imagen si es necesario
-                doc.Add(logo); // Agregar la imagen al documento
+                logo.ScaleToFit(530f, 200f);
+                doc.Add(logo);
             }
             catch (Exception ex)
             {
@@ -80,11 +76,7 @@ namespace Proyecto_Final_Progrmacion_II
             }
             lblTotalConImpuesto.Text = $"Total con IVA: {totalConImpuesto:C}";
             doc.Close();
-            MessageBox.Show("PDF generado correctamente.");
-            
-
-            //Correo
-            
+            //MessageBox.Show("PDF generado correctamente.");
         }
 
         private void buttonFinalizarCompra_Click(object sender, EventArgs e)

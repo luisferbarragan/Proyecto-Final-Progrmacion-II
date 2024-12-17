@@ -40,5 +40,10 @@ namespace Proyecto_Final_Progrmacion_II
                 }
             }
         }
+
+        private void buttonSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -24,89 +24,80 @@ namespace Proyecto_Final_Progrmacion_II
 
         public void FormMenu_Load(object sender, EventArgs e)
         {
-
-            List<Productos> listado;
-            List<string> imagenes = new List<string>();
-            DataBase obj = new DataBase();
-            listado = obj.consulta();
-            FormIngresoUsuario f1 = new FormIngresoUsuario();
+            List<Productos> listaProductos;
+            List<string> listaImagenes = new List<string>();
+            DataBase baseDatos = new DataBase();
+            listaProductos = baseDatos.consulta();
             lblHoraFecha.Text = DateTime.Now.ToString("dd/MM/yyyy\n HH:mm:ss");
-            foreach (var p in listado)
+            foreach (var producto in listaProductos)
             {
-                imagenes.Add(p.NombreImg); // Add image paths to the list
+                listaImagenes.Add(producto.NombreImg);
             }
-            LoadImagesAndTextToFlowLayoutPanel(listado);
-
+            CargarImagenesYTextoFlowLayoutPanel(listaProductos);
         }
 
-        private List<(Productos producto, int cantidad)> cart = new List<(Productos producto, int cantidad)>();
+        private List<(Productos producto, int cantidad)> carrito = new List<(Productos producto, int cantidad)>();
 
-        private void LoadImagesAndTextToFlowLayoutPanel(List<Productos> productos)
+        private void CargarImagenesYTextoFlowLayoutPanel(List<Productos> listaProductos)
         {
-            // Define the relative folder containing the images
-            string imagesFolder = "imagenes"; // Replace with the folder name that contains the images
-            string imagesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagesFolder);
+            string carpetaImagenes = "imagenes";
+            string rutaImagenes = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, carpetaImagenes);
 
-            foreach (var producto in productos)
+            foreach (var producto in listaProductos)
             {
                 try
                 {
-                    // Create a Panel to hold the image and text
-                    Panel panel = new Panel
+                    Panel panelProducto = new Panel
                     {
-                        Width = 220, // Set width
-                        Height = 225, // Set height
-                        Margin = new Padding(0), // Add some spacing
-                        //BorderStyle = BorderStyle.FixedSingle // Optional: Add a border for better visual separation
+                        Width = 220,
+                        Height = 225,
+                        Margin = new Padding(0),
                     };
 
-                    // Create a PictureBox for the image
-                    PictureBox pictureBox = new PictureBox
+                    PictureBox cuadroImagen = new PictureBox
                     {
-                        Image = System.Drawing.Image.FromFile(Path.Combine(imagesPath, producto.NombreImg)), // Load image from the constructed path
-                        SizeMode = PictureBoxSizeMode.StretchImage, // Adjust image scaling
-                        Width = 220, // Set desired width
-                        Height = 225, // Set desired height
-                        Dock = DockStyle.Fill, // Fill the panel with the image
+                        Image = System.Drawing.Image.FromFile(Path.Combine(rutaImagenes, producto.NombreImg)),
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Width = 220,
+                        Height = 225,
+                        Dock = DockStyle.Fill,
                     };
 
-                    // Create a Label for the text
-                    Label label = new Label
+                    Label etiquetaDescripcion = new Label
                     {
-                        Text = producto.Descripcion, // Use the text from the database
-                        AutoSize = false, // Allow custom width/height
-                        TextAlign = ContentAlignment.MiddleCenter, // Center align the text
-                        ForeColor = Color.Black, // Set the text color for better visibility
-                        Font = new Font("SugarPieW00-Regular", 10, FontStyle.Italic), // Optional: Customize the font
-                        BackColor = Color.Transparent, // Set the background to transparent
-                        Width = 220, // Match the width of the PictureBox
-                        Height = 65, // Set a fixed height for the label
-                        Dock = DockStyle.Bottom, // Position the label at the top
+                        Text = producto.Descripcion,
+                        AutoSize = false,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        ForeColor = Color.Black,
+                        Font = new Font("SugarPieW00-Regular", 10, FontStyle.Italic),
+                        BackColor = Color.Transparent,
+                        Width = 220,
+                        Height = 65,
+                        Dock = DockStyle.Bottom,
                     };
 
-                    Button button = new Button
+                    Button botonInformacion = new Button
                     {
-                        Text = "", // Change the label to "Info"
-                        Size = new Size(25, 25), // Set the size of the button
-                        Location = new Point(20, 5), // Position at the top-left corner of the panel
-                        BackColor = Color.White, // Set the button color
-                        ForeColor = Color.Black, // Set the text color
-                        FlatStyle = FlatStyle.Flat, // Optional: Flat style for modern look
-                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(imagesPath, "info.png")),
+                        Text = "",
+                        Size = new Size(25, 25),
+                        Location = new Point(20, 5),
+                        BackColor = Color.White,
+                        ForeColor = Color.Black,
+                        FlatStyle = FlatStyle.Flat,
+                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(rutaImagenes, "info.png")),
                         BackgroundImageLayout = ImageLayout.Stretch
                     };
-                    button.FlatAppearance.BorderSize = 0; // Remove the border
+                    botonInformacion.FlatAppearance.BorderSize = 0;
 
-                    // Add a click event handler to the button
-                    button.Click += (s, e) =>
+                    botonInformacion.Click += (s, e) =>
                     {
-                        Panel infoPanel = CreateProductInfoPanel(producto);
-                        infoPanel.Location = new Point(130, 280);
-                        this.Controls.Add(infoPanel);
-                        infoPanel.BringToFront();
+                        Panel panelInfo = CrearPanelInformacionProducto(producto);
+                        panelInfo.Location = new Point(130, 280);
+                        this.Controls.Add(panelInfo);
+                        panelInfo.BringToFront();
                     };
 
-                    Button addToCartButton = new Button
+                    Button botonAgregarCarrito = new Button
                     {
                         Text = "",
                         Size = new Size(25, 25),
@@ -114,67 +105,54 @@ namespace Proyecto_Final_Progrmacion_II
                         BackColor = Color.Green,
                         ForeColor = Color.White,
                         FlatStyle = FlatStyle.Flat,
-                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(imagesPath, "carrito.png")),
+                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(rutaImagenes, "carrito.png")),
                         BackgroundImageLayout = ImageLayout.Stretch
                     };
-                    addToCartButton.FlatAppearance.BorderSize = 0;
-                    int existenciasActuales = producto.Exist;
-                    addToCartButton.Click += (s, e) =>
+                    botonAgregarCarrito.FlatAppearance.BorderSize = 0;
+
+                    int cantidadExistente = producto.Exist;
+                    botonAgregarCarrito.Click += (s, e) =>
                     {
-                        if (producto.Exist > 0 && existenciasActuales > 0)
+                        if (producto.Exist > 0 && cantidadExistente > 0)//Revisa si hay unidades del producto
                         {
-                            existenciasActuales--;
-                            AddToCart(producto);
+                            cantidadExistente--;
+                            AgregarAlCarrito(producto);
                         }
                         else MessageBox.Show("Los sentimos, no puedes agregar este producto a tu compra.");
                     };
 
-                    panel.Controls.Add(addToCartButton);
-                    // Add the Label and Button to the PictureBox
-                    pictureBox.Controls.Add(label);
-
-                    // Add the Button to the Panel
-                    panel.Controls.Add(button);
-
-                    // Add the PictureBox to the Panel
-                    panel.Controls.Add(pictureBox);
-
-                    // Add the Panel to the FlowLayoutPanel
-                    flowLayoutPanelImages.Controls.Add(panel);
+                    panelProducto.Controls.Add(botonAgregarCarrito);
+                    cuadroImagen.Controls.Add(etiquetaDescripcion);
+                    panelProducto.Controls.Add(botonInformacion);
+                    panelProducto.Controls.Add(cuadroImagen);
+                    flowLayoutPanelImages.Controls.Add(panelProducto);
                 }
                 catch (Exception ex)
                 {
-                    // Handle any errors (e.g., file not found)
-                    MessageBox.Show($"Error loading image or text for: {producto.Descripcion}\n{ex.Message}");
+                    MessageBox.Show($"Error al cargar la imagen o texto: {producto.Descripcion}\n{ex.Message}");
                 }
             }
         }
 
-        private void AddToCart(Productos producto)
-        {
-            // Check if the product is already in the cart
-            var existingProductIndex = cart.FindIndex(p => p.producto.Descripcion == producto.Descripcion);
 
-            if (existingProductIndex >= 0)
+        private void AgregarAlCarrito(Productos producto)
+        {
+            var indiceExistente = carrito.FindIndex(p => p.producto.Descripcion == producto.Descripcion);
+            if (indiceExistente >= 0)
             {
-                // Increase the quantity if the product already exists in the cart
-                //existingProduct.cantidad++;
-                cart[existingProductIndex] = (cart[existingProductIndex].producto, cart[existingProductIndex].cantidad + 1);
+                carrito[indiceExistente] = (carrito[indiceExistente].producto, carrito[indiceExistente].cantidad + 1);
             }
             else
             {
-                // Add a new product to the cart with an initial quantity of 1
-                cart.Add((producto, 1));
+                carrito.Add((producto, 1));
             }
-
-            // Optionally, update the cart view immediately
-            mostrarProductoFlowLayoutCarrito(cart);
+            MostrarCarrito(carrito);
             ActualizarTotal();
         }
 
-        private Panel CreateProductInfoPanel(Productos producto)
+        private Panel CrearPanelInformacionProducto(Productos producto)
         {
-            Panel infoPanel = new Panel
+            Panel panelInfo = new Panel
             {
                 Width = 220,
                 Height = 100,
@@ -183,7 +161,7 @@ namespace Proyecto_Final_Progrmacion_II
                 BackColor = Color.Chartreuse,
             };
 
-            Label priceLabel = new Label
+            Label etiquetaPrecio = new Label
             {
                 Text = $"Precio: {producto.Precio:C}",
                 AutoSize = false,
@@ -195,7 +173,7 @@ namespace Proyecto_Final_Progrmacion_II
                 Dock = DockStyle.Top
             };
 
-            Label stockLabel = new Label
+            Label etiquetaStock = new Label
             {
                 Text = $"Unidades: {producto.Exist}",
                 AutoSize = false,
@@ -207,7 +185,7 @@ namespace Proyecto_Final_Progrmacion_II
                 Dock = DockStyle.Top
             };
 
-            Button closeButton = new Button
+            Button botonCerrar = new Button
             {
                 Text = "Cerrar",
                 Size = new Size(60, 30),
@@ -216,110 +194,100 @@ namespace Proyecto_Final_Progrmacion_II
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
             };
-            closeButton.FlatAppearance.BorderSize = 0;
-            closeButton.Click += (s, e) => infoPanel.Visible = false;
+            botonCerrar.FlatAppearance.BorderSize = 0;
+            botonCerrar.Click += (s, e) => panelInfo.Visible = false;
 
-            infoPanel.Controls.Add(priceLabel);
-            infoPanel.Controls.Add(stockLabel);
-            infoPanel.Controls.Add(closeButton);
-
-            return infoPanel;
+            panelInfo.Controls.Add(etiquetaPrecio);
+            panelInfo.Controls.Add(etiquetaStock);
+            panelInfo.Controls.Add(botonCerrar);
+            return panelInfo;
         }
 
-        private void mostrarProductoFlowLayoutCarrito(List<(Productos producto, int cantidad)> productosEnCarrito)
+        private void MostrarCarrito(List<(Productos producto, int cantidad)> listaCarrito)
         {
-            flowLayoutPanelCarrito.Controls.Clear(); // Clear existing controls to avoid duplicates
-            string imagesFolder = "imagenes"; // Replace with the folder name that contains the images
-            string imagesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagesFolder);
+            flowLayoutPanelCarrito.Controls.Clear();
+            string carpetaImagenes = "imagenes";
+            string rutaImagenes = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, carpetaImagenes);
 
-            foreach (var item in productosEnCarrito)
+            foreach (var item in listaCarrito)
             {
                 try
                 {
-                    string nombreImgCarrito = "1" + item.producto.NombreImg;
-                    // Create a Panel to hold the product info
+                    string nombreImagenCarrito = "1" + item.producto.NombreImg;
                     Panel panel = new Panel
                     {
-                        Width = 450, // Set width
-                        Height = 75, // Set height
-                        Margin = new Padding(0), // Add some spacing
-                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(imagesPath, nombreImgCarrito)), // Set the background image
-                        BackgroundImageLayout = ImageLayout.Stretch // Stretch the image to fit the 
+                        Width = 450,
+                        Height = 75,
+                        Margin = new Padding(0),
+                        BackgroundImage = System.Drawing.Image.FromFile(Path.Combine(rutaImagenes, nombreImagenCarrito)),
+                        BackgroundImageLayout = ImageLayout.Stretch
                     };
 
-                    // Create a Label for the product name
-                    Label nameLabel = new Label
+                    Label etiquetaNombre = new Label
                     {
-                        Text = item.producto.Descripcion, // Use the product name
-                        AutoSize = false, // Allow custom width/height
-                        TextAlign = ContentAlignment.MiddleCenter, // Center align the text
-                        ForeColor = Color.White, // Set the text color
+                        Text = item.producto.Descripcion,
+                        AutoSize = false,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        ForeColor = Color.White,
                         BackColor = Color.Transparent,
-                        Font = new Font("Arial", 10, FontStyle.Italic), // Customize the font
-                        Width = 200, // Match the width of the panel
-                        Height = 20, // Set a fixed height for the label
-                        Dock = DockStyle.Top // Position the label at the top
+                        Font = new Font("Arial", 10, FontStyle.Italic),
+                        Width = 200,
+                        Height = 20,
+                        Dock = DockStyle.Top
                     };
 
-                    // Create a Label for the product price
-                    Label priceLabel = new Label
+                    Label etiquetaPrecio = new Label
                     {
-                        Text = $"Precio: {(item.producto.Precio * item.cantidad):C}", // Use the product price
-                        AutoSize = false, // Allow custom width/height
-                        TextAlign = ContentAlignment.MiddleCenter, // Center align the text
-                        ForeColor = Color.White, // Set the text color
+                        Text = $"Precio: {(item.producto.Precio * item.cantidad):C}",
+                        AutoSize = false,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        ForeColor = Color.White,
                         BackColor = Color.Transparent,
-                        Font = new Font("Arial", 10, FontStyle.Italic), // Customize the font
-                        Width = 200, // Match the width of the panel
-                        Height = 20, // Set a fixed height for the label
-                        Dock = DockStyle.Top // Position the label below the name
+                        Font = new Font("Arial", 10, FontStyle.Italic),
+                        Width = 200,
+                        Height = 20,
+                        Dock = DockStyle.Top
                     };
 
-                    // Create a Label for the product quantity
-                    Label quantityLabel = new Label
+                    Label etiquetaCantidad = new Label
                     {
-                        Text = $"Cantidad: {item.cantidad}", // Use the product stock
-                        AutoSize = false, // Allow custom width/height
-                        TextAlign = ContentAlignment.BottomCenter, // Center align the text
-                        ForeColor = Color.White, // Set the text color
+                        Text = $"Cantidad: {item.cantidad}",
+                        AutoSize = false,
+                        TextAlign = ContentAlignment.BottomCenter,
+                        ForeColor = Color.White,
                         BackColor = Color.Transparent,
-                        Font = new Font("Arial", 10, FontStyle.Italic), // Customize the font
-                        Width = 200, // Match the width of the panel
-                        Height = 25, // Set a fixed height for the label
-                        Dock = DockStyle.Top // Position the label below the price
+                        Font = new Font("Arial", 10, FontStyle.Italic),
+                        Width = 200,
+                        Height = 25,
+                        Dock = DockStyle.Top
                     };
 
-                    // Create a Button to remove the product from the cart
-                    Button removeButton = new Button
+                    Button botonEliminar = new Button
                     {
                         Text = "Eliminar",
                         Size = new Size(80, 30),
-                        Location = new Point(350, 20), // Position within the panel
+                        Location = new Point(350, 20),
                         BackColor = Color.Red,
                         ForeColor = Color.White,
                         FlatStyle = FlatStyle.Flat
                     };
-                    removeButton.FlatAppearance.BorderSize = 0;
-
-                    // Add a click event handler to remove the product from the cart
-                    removeButton.Click += (s, e) =>
+                    botonEliminar.FlatAppearance.BorderSize = 0;
+                    botonEliminar.Click += (s, e) =>
                     {
-                        cart.Remove(item); // Remove the product from the list
-                        mostrarProductoFlowLayoutCarrito(cart); // Refresh the cart view
+                        carrito.Remove(item);
+                        MostrarCarrito(carrito);
                         ActualizarTotal();
                     };
 
-                    // Add the controls to the panel
-                    panel.Controls.Add(removeButton);
-                    panel.Controls.Add(nameLabel);
-                    panel.Controls.Add(priceLabel);
-                    panel.Controls.Add(quantityLabel);
+                    panel.Controls.Add(botonEliminar);
+                    panel.Controls.Add(etiquetaNombre);
+                    panel.Controls.Add(etiquetaPrecio);
+                    panel.Controls.Add(etiquetaCantidad);
                     flowLayoutPanelCarrito.Controls.Add(panel);
                 }
                 catch (Exception ex)
                 {
-                    // Handle any errors (e.g., missing data)
-                    MessageBox.Show($"Error loading cart item: {item.producto.Descripcion}\n{ex.Message}");
+                    MessageBox.Show($"Error al cargar el producto en el carrito: {item.producto.Descripcion}\n{ex.Message}");
                 }
             }
         }
@@ -376,7 +344,7 @@ namespace Proyecto_Final_Progrmacion_II
         }
         private void ActualizarTotal()
         {
-            double total = cart.Sum(item => item.producto.Precio * item.cantidad);
+            double total = carrito.Sum(item => item.producto.Precio * item.cantidad);
             textBoxTotal.Text = total.ToString("C");
         }
 
@@ -386,7 +354,7 @@ namespace Proyecto_Final_Progrmacion_II
         {
             try
             {
-                if (cart.Count == 0)
+                if (carrito.Count == 0)
                 {
                     MessageBox.Show("El carrito está vacío. Agregue productos antes de realizar una compra.", "Carrito vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -395,13 +363,13 @@ namespace Proyecto_Final_Progrmacion_II
 
 
                 // Sumar el monto total
-                double total = cart.Sum(item => item.producto.Precio * item.cantidad);
+                double total = carrito.Sum(item => item.producto.Precio * item.cantidad);
                 if (descuentoAplicado > 0)
                 {
                     total -= total * descuentoAplicado;
                 }
                 double totalConImpuesto = total + (total * 0.06);
-                int totalPlayeras = cart.Sum(item => item.cantidad);
+                int totalPlayeras = carrito.Sum(item => item.cantidad);
 
 
 
@@ -426,7 +394,7 @@ namespace Proyecto_Final_Progrmacion_II
                 }
 
                 // Actualizar las existencias de productos en la base de datos
-                foreach (var item in cart)
+                foreach (var item in carrito)
                 {
                     bool productoActualizado = db.ReducirExistenciasProducto(item.producto.Id, item.cantidad);
 
@@ -437,12 +405,12 @@ namespace Proyecto_Final_Progrmacion_II
                     }
                 }
 
-                FormNotaCompra resumenCompra = new FormNotaCompra(DateTime.Now, cart, totalConImpuesto);
+                FormNotaCompra resumenCompra = new FormNotaCompra(DateTime.Now, carrito, totalConImpuesto);
                 resumenCompra.ShowDialog();
 
                 // Limpiar el carrito después de la compra
-                cart.Clear();
-                mostrarProductoFlowLayoutCarrito(cart);
+                carrito.Clear();
+                MostrarCarrito(carrito);
                 ActualizarTotal();
                 RefrescarDatos();
 
@@ -466,7 +434,7 @@ namespace Proyecto_Final_Progrmacion_II
 
                 // Actualizar la vista de productos
                 flowLayoutPanelImages.Controls.Clear(); // Limpiar los datos actuales
-                LoadImagesAndTextToFlowLayoutPanel(productosActualizados);
+                CargarImagenesYTextoFlowLayoutPanel(productosActualizados);
 
                 // Opcional: Recargar el total del carrito si es necesario
                 ActualizarTotal();
@@ -499,7 +467,7 @@ namespace Proyecto_Final_Progrmacion_II
                 {
                     descuentoAplicado = descuento;
                     // Aplicar el descuento
-                    double total = cart.Sum(item => item.producto.Precio * item.cantidad);
+                    double total = carrito.Sum(item => item.producto.Precio * item.cantidad);
                     double totalConDescuento = total - (total * descuento);
                     total = totalConDescuento;
 

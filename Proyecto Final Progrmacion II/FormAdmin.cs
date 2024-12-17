@@ -33,7 +33,6 @@ namespace Proyecto_Final_Progrmacion_II
             {
                 Dock = DockStyle.Fill,
             };
-            // Crear el modelo de gráfico
             var model = new PlotModel { Title = "Inventario", Padding = new OxyThickness(100, 100, 100, 100) };
             var pieSeries = new PieSeries
             {
@@ -102,7 +101,7 @@ namespace Proyecto_Final_Progrmacion_II
             obj.Disconnect();
         }
 
-        private void btnCargar_Click(object sender, EventArgs e)
+        private void btnCargar_Click(object sender, EventArgs e)//Listado Normal
         {
             DataBase obj = new DataBase();
             listado = obj.consulta();
@@ -125,7 +124,7 @@ namespace Proyecto_Final_Progrmacion_II
             this.Close();
         }
 
-        private void btnCargarRichTxt2_Click(object sender, EventArgs e)
+        private void btnCargarRichTxt2_Click(object sender, EventArgs e)//Lista Ordenada por Existencias
         {
             DataBase obj = new DataBase();
             listado = obj.consulta();
