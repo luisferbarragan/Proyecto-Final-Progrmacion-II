@@ -21,8 +21,8 @@ namespace Proyecto_Final_Progrmacion_II
         {
             InitializeComponent();
             lblFechaHora.Text = fechaHora.ToString("dd/MM/yyyy HH:mm:ss");
+            lblTotalConImpuesto.Text = $"Total con IVA: {totalConImpuesto:C}";
 
- 
             Document doc = new Document();
             PdfWriter.GetInstance(doc, new FileStream("nota.pdf", FileMode.Create));
             doc.Open();
@@ -74,7 +74,7 @@ namespace Proyecto_Final_Progrmacion_II
             {
                 MessageBox.Show("Error al agregar la imagen: " + ex.Message);
             }
-            lblTotalConImpuesto.Text = $"Total con IVA: {totalConImpuesto:C}";
+            
             doc.Close();
             //MessageBox.Show("PDF generado correctamente.");
         }
@@ -89,7 +89,7 @@ namespace Proyecto_Final_Progrmacion_II
             {
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress("OverCat", "luisfer1918650@gmail.com"));
-                message.To.Add(new MailboxAddress("Arturop", textBoxCorreo.Text));
+                message.To.Add(new MailboxAddress("Usuario", textBoxCorreo.Text));
                 message.Subject = "NOTA DE COMPRA";
                 message.Body = new TextPart("plain")
                 {

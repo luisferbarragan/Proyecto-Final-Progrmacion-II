@@ -32,6 +32,10 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             txtEliminar = new TextBox();
+            panelConfirmarBaja = new Panel();
+            buttonCancelar = new Button();
+            buttonConfirmar = new Button();
+            richTextBoxBaja = new RichTextBox();
             tabPage2 = new TabPage();
             txtAgregarId = new TextBox();
             txtAgregarNombreImg = new TextBox();
@@ -52,6 +56,7 @@
             btnCerrarSesionAdmin = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            panelConfirmarBaja.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
@@ -64,7 +69,7 @@
             btnEliminar.FlatAppearance.BorderSize = 0;
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.ForeColor = Color.Black;
-            btnEliminar.Location = new Point(156, 132);
+            btnEliminar.Location = new Point(150, 172);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(75, 23);
             btnEliminar.TabIndex = 0;
@@ -89,6 +94,7 @@
             // tabPage1
             // 
             tabPage1.BackgroundImage = Properties.Resources.color2oscuro;
+            tabPage1.Controls.Add(panelConfirmarBaja);
             tabPage1.Controls.Add(txtEliminar);
             tabPage1.Controls.Add(btnEliminar);
             tabPage1.Location = new Point(4, 24);
@@ -103,12 +109,61 @@
             // txtEliminar
             // 
             txtEliminar.BackColor = Color.Chartreuse;
-            txtEliminar.Location = new Point(144, 103);
+            txtEliminar.Location = new Point(138, 143);
             txtEliminar.Name = "txtEliminar";
             txtEliminar.PlaceholderText = "id";
             txtEliminar.Size = new Size(100, 23);
             txtEliminar.TabIndex = 1;
             txtEliminar.TextAlign = HorizontalAlignment.Center;
+            // 
+            // panelConfirmarBaja
+            // 
+            panelConfirmarBaja.BackColor = Color.Chartreuse;
+            panelConfirmarBaja.Controls.Add(buttonCancelar);
+            panelConfirmarBaja.Controls.Add(buttonConfirmar);
+            panelConfirmarBaja.Controls.Add(richTextBoxBaja);
+            panelConfirmarBaja.Location = new Point(82, 92);
+            panelConfirmarBaja.Name = "panelConfirmarBaja";
+            panelConfirmarBaja.Size = new Size(207, 214);
+            panelConfirmarBaja.TabIndex = 2;
+            panelConfirmarBaja.Visible = false;
+            // 
+            // buttonCancelar
+            // 
+            buttonCancelar.BackColor = Color.MediumSlateBlue;
+            buttonCancelar.FlatAppearance.BorderSize = 0;
+            buttonCancelar.FlatStyle = FlatStyle.Flat;
+            buttonCancelar.ForeColor = SystemColors.ButtonHighlight;
+            buttonCancelar.Location = new Point(21, 173);
+            buttonCancelar.Name = "buttonCancelar";
+            buttonCancelar.Size = new Size(66, 29);
+            buttonCancelar.TabIndex = 2;
+            buttonCancelar.Text = "Cancelar";
+            buttonCancelar.UseVisualStyleBackColor = false;
+            buttonCancelar.Click += buttonCancelar_Click;
+            // 
+            // buttonConfirmar
+            // 
+            buttonConfirmar.BackColor = Color.MediumSlateBlue;
+            buttonConfirmar.FlatAppearance.BorderSize = 0;
+            buttonConfirmar.FlatStyle = FlatStyle.Flat;
+            buttonConfirmar.ForeColor = SystemColors.ButtonFace;
+            buttonConfirmar.Location = new Point(115, 173);
+            buttonConfirmar.Name = "buttonConfirmar";
+            buttonConfirmar.Size = new Size(72, 29);
+            buttonConfirmar.TabIndex = 1;
+            buttonConfirmar.Text = "Confirmar";
+            buttonConfirmar.UseVisualStyleBackColor = false;
+            buttonConfirmar.Click += buttonConfirmar_Click;
+            // 
+            // richTextBoxBaja
+            // 
+            richTextBoxBaja.BackColor = Color.Chartreuse;
+            richTextBoxBaja.Location = new Point(21, 11);
+            richTextBoxBaja.Name = "richTextBoxBaja";
+            richTextBoxBaja.Size = new Size(166, 156);
+            richTextBoxBaja.TabIndex = 0;
+            richTextBoxBaja.Text = "";
             // 
             // tabPage2
             // 
@@ -323,6 +378,7 @@
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            panelConfirmarBaja.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             tabPage3.ResumeLayout(false);
@@ -356,5 +412,9 @@
         private Button buttonMostrarTotalVentas;
         private TextBox textBoxTotalVentas;
         private TabPage tabPage6;
+        private Panel panelConfirmarBaja;
+        private RichTextBox richTextBoxBaja;
+        private Button buttonCancelar;
+        private Button buttonConfirmar;
     }
 }

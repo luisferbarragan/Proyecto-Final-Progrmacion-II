@@ -50,11 +50,11 @@ namespace Proyecto_Final_Progrmacion_II
             listado.ForEach(p =>
             {
                 var color = OxyColor.FromRgb(
-                (byte)random.Next(0, 256), 
-                (byte)random.Next(0, 256), 
-                (byte)random.Next(0, 256) 
+                (byte)random.Next(0, 256),
+                (byte)random.Next(0, 256),
+                (byte)random.Next(0, 256)
                 );
-                pieSeries.Slices.Add(new PieSlice(p.NombreImg.Remove(p.NombreImg.Length - 4,4), p.Exist) { Fill = color});
+                pieSeries.Slices.Add(new PieSlice(p.NombreImg.Remove(p.NombreImg.Length - 4, 4), p.Exist) { Fill = color });
             });
 
             // Añadir la serie al modelo
@@ -77,9 +77,20 @@ namespace Proyecto_Final_Progrmacion_II
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             DataBase obj = new DataBase();
-            obj.eliminar(Convert.ToInt32(this.txtEliminar.Text));
-            this.txtEliminar.PlaceholderText = "id eliminar";
-            obj.Disconnect();
+            this.panelConfirmarBaja.Visible = true;
+            Productos aux = obj.consultaPorId(Convert.ToInt32(this.txtEliminar.Text));
+            if (aux != null)
+            {
+                richTextBoxBaja.AppendText($"ID: {aux.Id}\n");
+                richTextBoxBaja.AppendText($"Nombre Imagen: {aux.NombreImg}\n");
+                richTextBoxBaja.AppendText($"Descripción: {aux.Descripcion}\n");
+                richTextBoxBaja.AppendText($"Precio: {aux.Precio}\n");
+                richTextBoxBaja.AppendText($"Existencias: {aux.Exist}\n\n");
+            }
+            else
+            {
+                richTextBoxBaja.AppendText("Producto no encontrado.\n\n");
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -105,7 +116,7 @@ namespace Proyecto_Final_Progrmacion_II
         {
             DataBase obj = new DataBase();
             listado = obj.consulta();
-
+            this.richTextBoxListado.Clear();
             listado.ForEach(p =>
             {
                 this.richTextBoxListado.AppendText("ID: " + p.Id + "\nNombre Imagen: " + p.NombreImg + "\nDescripcion: " + p.Descripcion + "\nPrecio: " + p.Precio +
@@ -167,6 +178,24 @@ namespace Proyecto_Final_Progrmacion_II
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            this.richTextBoxBaja.Clear();
+            this.panelConfirmarBaja.Visible = false;
+            this.txtEliminar.Text = "";
+            this.txtEliminar.PlaceholderText = "id eliminar";
+        }
+
+        private void buttonConfirmar_Click(object sender, EventArgs e)
+        {
+            DataBase obj = new DataBase();
+            listado = obj.consulta();
+            obj.eliminar(Convert.ToInt32(this.txtEliminar.Text));
+            this.txtEliminar.PlaceholderText = "id eliminar";
+            this.panelConfirmarBaja.Visible = false;
+            obj.Disconnect();
         }
     }
 }

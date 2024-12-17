@@ -111,6 +111,37 @@ namespace Proyecto_Final_Progrmacion_II
             return data;
         }
 
+        public Productos consultaPorId(int idProducto)
+        {
+            Productos producto = null;
+            try
+            {
+                string query = "SELECT id, nombreimg, descripcion, precio, existencias FROM productos WHERE id = @id";
+                MySqlCommand command = new MySqlCommand(query, this.connection);
+                command.Parameters.AddWithValue("@id", idProducto);
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+
+                    int id = Convert.ToInt32(reader["id"]);
+                    string nombreImg = Convert.ToString(reader["nombreimg"]) ?? "";
+                    string descripcion = Convert.ToString(reader["descripcion"]) ?? "";
+                    double precio = Convert.ToDouble(reader["precio"]);
+                    int exist = Convert.ToInt32(reader["existencias"]);
+
+                    producto = new Productos(id, nombreImg, descripcion, precio, exist);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el producto: " + ex.Message);
+                this.Disconnect();
+            }
+            return producto;
+        }
+
+
         public void insertar(int idp, string img, string des, double price, int ex)//Altas
         {
             string query = "INSERT INTO productos (id, nombreimg, descripcion, precio, existencias) VALUES (@id, @img, @des, @price, @ex)";
@@ -156,7 +187,7 @@ namespace Proyecto_Final_Progrmacion_II
                 query = "DELETE FROM productos WHERE id=" + idp + ";";
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.ExecuteNonQuery();
-                MessageBox.Show(query + "\nRegistro Eliminado");
+                //MessageBox.Show(query + "\nRegistro Eliminado");
             }
             catch (Exception ex)
             {

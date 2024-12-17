@@ -24,16 +24,16 @@ namespace Proyecto_Final_Progrmacion_II
 
         public void FormMenu_Load(object sender, EventArgs e)
         {
-            List<Productos> listaProductos;
-            List<string> listaImagenes = new List<string>();
             DataBase baseDatos = new DataBase();
+            List<Productos> listaProductos;
             listaProductos = baseDatos.consulta();
-            lblHoraFecha.Text = DateTime.Now.ToString("dd/MM/yyyy\n HH:mm:ss");
+            List<string> listaImagenes = new List<string>();
             foreach (var producto in listaProductos)
             {
                 listaImagenes.Add(producto.NombreImg);
             }
             CargarImagenesYTextoFlowLayoutPanel(listaProductos);
+            lblHoraFecha.Text = DateTime.Now.ToString("dd/MM/yyyy\n HH:mm:ss");
         }
 
         private List<(Productos producto, int cantidad)> carrito = new List<(Productos producto, int cantidad)>();
@@ -445,7 +445,7 @@ namespace Proyecto_Final_Progrmacion_II
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//Agrega Cupon
         {
             try
             {
@@ -461,6 +461,7 @@ namespace Proyecto_Final_Progrmacion_II
                 Dictionary<string, double> cuponesValidos = new Dictionary<string, double>
                 {
                     { "NAVIDAD", 0.30 },
+                    { "OCTUBRE", 0.50 }
                 };
 
                 if (cuponesValidos.TryGetValue(cuponIngresado.ToUpper(), out double descuento))
